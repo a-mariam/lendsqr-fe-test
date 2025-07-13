@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from "next/image";
 import {Input} from "@/components/ui/input";
-import {inter} from "@/app/fonts";
+import {inter, Roboto400} from "@/app/fonts";
 import {MagnifyingGlassIcon,BellIcon} from "@radix-ui/react-icons"
 
 const Topbar = () => {
@@ -37,11 +37,16 @@ const Topbar = () => {
                     </div>
                 </div>
             </div>
-            <div className={` bg-red-200 self-center h-fit pr-20 flex justify-end w-full`}>
+            <div className={`  self-center h-fit pr-20 flex justify-end w-full`}>
                 <div className={` flex gap-4`}>
-                    <p className={`underline text-[#213F7D] mt-auto mb-auto  `}>Docs</p>
+                    <p className={` ${Roboto400.className} underline text-[#213F7D] mt-auto mb-auto  `}>Docs</p>
                     <BellIcon data-testid={'notificationIcon'} id={'notificationIcon'} className={` mt-auto mb-auto h-6 w-6 text-[#213F7D]  `}/>
-
+                    <div>
+                        <Avatar>
+                            <AvatarImage src="https://github.com/shadcn.png" />
+                            <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                    </div>
                 </div>
             </div>
         </div>
