@@ -8,8 +8,8 @@ import { MdArrowDropDown } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import styles from './index.module.css'
 const Topbar = () => {
-    // box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
-    // box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+
+
     return (
         <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky grid grid-cols-2 top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBar}`}>
             <div className={`w-[52vw]  lg:flex lg:justify-between  md:flex md:justify-between  md:pl-6 lg:pl-6  h-fit self-center flex justify-between `}>
@@ -30,7 +30,7 @@ const Topbar = () => {
                 </div>
                 <div className=" w-[55%] sm:hidden  md:flex lg:flex hidden  ">
                     <div className="relative w-full justify-end ">
-                        <input
+                        <Input
                             id={'searchInput'}
                             data-testid={`searchInput`}
                             type="text"

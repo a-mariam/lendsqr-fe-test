@@ -39,6 +39,7 @@ const AuthInputField: React.FC<ReusableInputProps> = ({label,height,width, id, e
                  className={`flex items-center ${height}  ${width ? width : `w-full`} gap-2 rounded-sm border-2 border-[#545F7D26]  `}>
                 <Input
                     id={id}
+                    data-testid={id}
                     placeholder={label}
                     type={isPasswordVisible ? 'text' : type}
                     className={`${inter.className} focus-visible:ring-0  w-full h-full border-0 text-[#cdd1da] text-[12px] bg-white placeholder:text-[14px] placeholder:text-[#cdd1da] data-[placeholder]:bg-[#cdd1da] data-[placeholder]:text-[8px] focus:outline-none`}
