@@ -1,14 +1,22 @@
 import React from 'react';
 import Image from "next/image";
 import {Input} from "@/components/ui/input";
-import {inter, Roboto400} from "@/app/fonts";
+import {inter, Roboto400,workSans} from "@/app/fonts";
 import {MagnifyingGlassIcon,BellIcon} from "@radix-ui/react-icons"
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { MdArrowDropDown } from "react-icons/md";
+import { IoMdMenu } from "react-icons/io";
+import styles from './index.module.css'
 const Topbar = () => {
+    // box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+    // box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
     return (
-        <div className={` w-screen bg-white sticky grid grid-cols-2 top-0 h-[13vh] shadow-md `}>
-            <div className={`w-[50vw]  pl-6 h-fit self-center flex justify-between `}>
-                <div className={`  `}>
+        <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky grid grid-cols-2 top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBar}`}>
+            <div className={`w-[52vw]  lg:flex lg:justify-between  md:flex md:justify-between  md:pl-6 lg:pl-6  h-fit self-center flex justify-between `}>
+                <IoMdMenu className={`md:hidden lg:hidden flex`} color='#213F7D' style={{ height: '1.5rem', width: '1.5rem' }}
+                          // onClick={openMobileSideBar}
+                />
+                <div className={` md:grid sm:hidden lg:grid hidden `}>
                     <Image
                         id={'lendsqrLogo'}
                         data-testid={'lendsqrLogo'}
@@ -20,32 +28,34 @@ const Topbar = () => {
                         className={`w-[90%] h-full`}
                     />
                 </div>
-
-                <div id={`input-container-`}
-                     // dir="ltr"
-                     className={`flex items-center w-[58%]  h-  gap-0 rounded-sm border-1 border-[#545F7D26]  `}>
-                    <Input
-                        id={'inputField'}
-                        data-testid={'inputField'}
-                        placeholder={'Search for anything'}
-                        // type={isPasswordVisible ? 'text' : type}
-                        className={`${inter.className} focus-visible:ring-0 bg-white  h- w-full border-0 text-[#cdd1da] text-[12px]  placeholder:text-[14px] placeholder:text-[#cdd1da] `}
-
-                    />
-                    <div id={'searchIcon'} data-testid={'seacrhIcon'} className={` bg-[#39CDCC] h-[100%] rounded-r-sm grid w-fit px-5 `}>
-                        <MagnifyingGlassIcon  className={`h-4 self-center w-4`} color={'white'}/>
+                <div className=" w-[55%] sm:hidden  md:flex lg:flex hidden  ">
+                    <div className="relative w-full justify-end ">
+                        <input
+                            id={'searchInput'}
+                            data-testid={`searchInput`}
+                            type="text"
+                            placeholder="Search for anything"
+                            className={` ${inter.className}  placeholder:text-[14px] placeholder:text-[#cdd1da]  text-[15px] text-[#cdd1da] w-full pl-4 pr-12 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#39CDCC] focus:border-transparent`}
+                        />
+                        <button className="absolute right-0 top-0 h-full px-5 bg-[#39CDCC] text-white rounded-r-lg hover:bg-[#39CDCC]">
+                            <MagnifyingGlassIcon className="w-4 h-4" />
+                        </button>
                     </div>
                 </div>
             </div>
-            <div className={`  self-center h-fit pr-20 flex justify-end w-full`}>
-                <div className={` flex gap-4`}>
-                    <p className={` ${Roboto400.className} underline text-[#213F7D] mt-auto mb-auto  `}>Docs</p>
+            <div className={`  self-center h-fit md:pr-20 flex justify-end w-full`}>
+                <div className={` flex gap-8`}>
+                    <p className={`md:flex lg:flex hidden ${Roboto400.className} underline text-[16px] text-[#213F7D] mt-auto mb-auto  `}>Docs</p>
                     <BellIcon data-testid={'notificationIcon'} id={'notificationIcon'} className={` mt-auto mb-auto h-6 w-6 text-[#213F7D]  `}/>
-                    <div>
-                        <Avatar>
-                            <AvatarImage src="https://github.com/shadcn.png" />
+                    <div className={`flex gap-2`}>
+                        <Avatar className={`w-12 h-12`}>
+                            <AvatarImage  src="https://github.com/shadcn.png" />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
+                        <div className={`md:flex lg:flex hidden gap-2 `}>
+                            <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans.className} text-[16px]  text-[#213F7D] `}>Adedeji</p>
+                            <MdArrowDropDown className={` text-[#213F7D] h-4 w-4  mt-auto mb-auto`} />
+                        </div>
                     </div>
                 </div>
             </div>

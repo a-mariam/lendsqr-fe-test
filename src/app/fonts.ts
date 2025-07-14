@@ -1,12 +1,11 @@
-import { IBM_Plex_Sans, Inter, Mulish,Roboto} from 'next/font/google';
+import { IBM_Plex_Sans, Inter,Roboto,Work_Sans} from 'next/font/google';
 import localFont from "next/font/local";
-// Average_Sans, IBM_Plex_Sans, Inter,
 
-export const Ave = Mulish({
+export const workSans =  Work_Sans({
     subsets: ['latin'],
     display: 'swap',
     style: 'normal',
-    weight: '700',
+    weight: '500',
     preload: false
 })
 export const ibmPlexSans = IBM_Plex_Sans({
