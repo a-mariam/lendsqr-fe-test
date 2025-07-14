@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from "next/image";
 import {Input} from "@/components/ui/input";
-import {inter, Roboto400,workSans} from "@/app/fonts";
+import {inter, Roboto400,workSans500} from "@/app/fonts";
 import {MagnifyingGlassIcon,BellIcon} from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MdArrowDropDown } from "react-icons/md";
@@ -53,7 +53,7 @@ const Topbar = () => {
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                         <div className={`md:flex lg:flex hidden gap-2 `}>
-                            <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans.className} text-[16px]  text-[#213F7D] `}>Adedeji</p>
+                            <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans500.className} text-[16px]  text-[#213F7D] `}>Adedeji</p>
                             <MdArrowDropDown className={` text-[#213F7D] h-4 w-4  mt-auto mb-auto`} />
                         </div>
                     </div>
