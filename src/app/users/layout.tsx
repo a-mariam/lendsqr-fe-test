@@ -1,11 +1,10 @@
 import React from 'react';
+import Layout from "@/features/layout/index"
 
-const Layout = () => {
+const index = () => {
     return (
-        <div>
-            
-        </div>
+        <Layout/>
     );
 };
 
-export default Layout;
+export default index;

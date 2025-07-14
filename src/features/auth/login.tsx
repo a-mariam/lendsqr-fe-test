@@ -10,7 +10,7 @@ const Login = () => {
 
     const router = useRouter();
     const handleClick = () => {
-        router.push("/users");
+        router.push("/");
     }
     return (
         <div className={` w-screen h-screen  grid md:grid-cols-2`}>
