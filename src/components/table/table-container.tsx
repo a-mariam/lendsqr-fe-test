@@ -17,7 +17,7 @@ import {
     SelectValue,
     SelectGroup,
 } from "@/components/ui/select";
-import { ChevronDownIcon, ChevronUpIcon, DotsVerticalIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import {        DotsVerticalIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import {
     Menubar,
@@ -163,7 +163,7 @@ function DataTable<T extends TableRowData>({
     };
 
     const isLastPage = pageNumber + 1 === totalPages;
-    const staticColumn = tableHeader.find((header) => header.id === staticColumnKey);
+    // const staticColumn = tableHeader.find((header) => header.id === staticColumnKey);
     return (
         <div className="w-full">
             {isLoading ? (
@@ -233,10 +233,6 @@ function DataTable<T extends TableRowData>({
                             pageSize={rowsPerPage}
                             totalItems={tableData.length}
                             onPageChange={(page) => setPageNumber(page - 1)}
-                            onPageSizeChange={(size) => {
-                                setPageNumber(0); // reset to first page
-                                // Optionally, allow changing rowsPerPage via prop or state
-                            }}
                             handleNext={handleNextPage}
                             setRowsPerPage={setRowsPerPage}
 
@@ -303,9 +299,6 @@ function DataTable<T extends TableRowData>({
                         pageSize={rowsPerPage}
                         totalItems={tableData.length}
                         onPageChange={(page) => setPageNumber(page - 1)}
-                        onPageSizeChange={(size) => {
-                            setPageNumber(0);
-                        }}
                         handleNext={handleNextPage}
                         setRowsPerPage={setRowsPerPage}
                     />

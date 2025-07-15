@@ -23,6 +23,7 @@ const Table = () => {
     return (
         <div className={`w-full h-full pb-3`}>
             <TableContainer
+                // @ts-ignore
                 tableData={mockData}
                 tableHeader={tableHeader}
                 handleRowClick={rowClick}

@@ -1,4 +1,4 @@
-import {combineReducers, UnknownAction} from "@reduxjs/toolkit";
+import {combineReducers} from "@reduxjs/toolkit";
 import layoutReducer from "@/redux/slice/layoutSlice";
 
 const appReducer = combineReducers({

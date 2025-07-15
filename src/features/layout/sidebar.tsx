@@ -2,14 +2,11 @@
 import React from 'react';
 import styles from './index.module.css'
 import {store, useAppSelector} from '@/redux/store'
-import { FaUsers, FaMoneyCheckAlt,
-    FaCogs, FaList, FaWallet, FaBuilding,
-    FaChartBar, FaLock, FaFileAlt,
+import { FaUsers,
     FaPiggyBank,FaUserCheck,
 } from 'react-icons/fa';
 import {
-    MdPeopleAlt, MdOutlineSavings, MdOutlineReportGmailerrorred,
-    MdBusiness, MdRequestPage, MdLockOutline, MdSettings,
+    MdPeopleAlt
 } from 'react-icons/md';
 import {workSans} from "@/app/fonts";
 import {setShowMobileSidebar, setCurrentTab} from "@/redux/slice/layoutSlice";
