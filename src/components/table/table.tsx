@@ -2,6 +2,9 @@
 import React from 'react';
 import TableContainer from "@/components/table/table-container";
 import {mockData} from "@/util/mock-datas/table";
+import {MdOutlineRemoveRedEye} from "react-icons/md";
+import {FaUserCheck} from "react-icons/fa";
+import {FaUserXmark} from "react-icons/fa6";
 
 const Table = () => {
     const [pageNumber, setPageNumber] = React.useState(0);
@@ -19,6 +22,11 @@ const Table = () => {
         { id: "status", title: "STATUS" },
     ];
 
+    const dropDownOption = [
+        {name: 'View Details', id: '1', icon: <MdOutlineRemoveRedEye />},
+        {name: 'Blacklist User ', id: '2', icon: <FaUserCheck />},
+        {name: 'Activate User', id: '3', icon: <FaUserXmark />},
+    ];
 
     return (
         <div className={`w-full h-full pb-3`}>
@@ -37,6 +45,7 @@ const Table = () => {
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}
                 showKirkBabel={true}
+                kirkBabDropdownOption={dropDownOption}
             />
         </div>
     );

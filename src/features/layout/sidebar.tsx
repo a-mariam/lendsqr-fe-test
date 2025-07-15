@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './index.module.css'
 import {store, useAppSelector} from '@/redux/store'
 import { FaUsers,
-    FaPiggyBank,FaUserCheck,
+    FaPiggyBank,FaUserCheck,FaBriefcase,
 } from 'react-icons/fa';
 import {
     MdPeopleAlt
@@ -14,7 +14,6 @@ import Image from "next/image";
 import Moneybag from "@/components/icons/moneybag";
 import { FaRegHandshake, FaUserXmark } from "react-icons/fa6";
 import ReceiveMoney from "@/components/icons/ReceiveMoney";
-import { FaBriefcase } from "react-icons/fa";
 
 
 const Sidebar = () => {
@@ -141,7 +140,7 @@ const Sidebar = () => {
              </aside>
          )}
         <aside
-            className={` ${styles.topBar} md:grid lg:grid hidden grid w-[16vw]  md:w-[20vw] b max-h-[87vh] overflow-y-scroll  bg-white -md `}
+            className={` ${styles.mainContainerOverflowStyles} md:grid lg:grid hidden grid w-[16vw]  md:w-[20vw] b max-h-[87vh] overflow-hidden  bg-white -md `}
             // className={`hidden md:grid  md:bg-meedlWhite md:content-between md:w-[16vw]  md:px-4  md:py-6 md:border-r md:border-r-[blue300] md:z-0 md:h-[100%]`}
 
         >
@@ -149,7 +148,7 @@ const Sidebar = () => {
                 <div className="mb-6">
                     <button className="text-blue-700 font-bold text-lg mb-4">Switch Organization</button>
                 </div>
-                <nav className="space-y-6 overflow-y-auto h-[calc(100vh-100px)]">
+                <nav className="space-y-6  h-[calc(100vh-100px)]">
                     <div>
                         <h2 className="text-gray-500 text-xs px-8  uppercase font-semibold mb-2">Customers</h2>
                         <ul className="space-y-3">

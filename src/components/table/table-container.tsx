@@ -245,7 +245,9 @@ function DataTable<T extends TableRowData>({
                                                                 </MenubarContent>
                                                             </MenubarMenu>
                                                         </Menubar>
-                                                    }
+                                                        }
+                                                </TableCell>
+                                                )}
                                         </TableRow>
                                     ))}
                                 </TableBody>
