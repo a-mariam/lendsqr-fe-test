@@ -23,7 +23,8 @@ const Table = () => {
     return (
         <div className={`w-full h-full pb-3`}>
             <TableContainer
-                // @ts-ignore
+                //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
                 tableData={mockData}
                 tableHeader={tableHeader}
                 handleRowClick={rowClick}

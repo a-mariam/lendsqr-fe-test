@@ -245,7 +245,7 @@ function DataTable<T extends TableRowData>({
                                 <TableHeader className="sticky top-0 bg-white">
                                     <TableRow className={` h-fit py-6`}>
                                         <TableHead
-                                            className={`${workSans600.className} f mt-auto mb-auto text-[#545F7D] text-[16px]`}
+                                            className={`${workSans600.className} f mt-auto mb-auto py-4  text-[#545F7D] text-[16px]`}
                                         >{staticHeader}</TableHead>
                                         <TableHead>
                                             <Select
