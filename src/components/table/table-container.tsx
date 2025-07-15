@@ -71,7 +71,7 @@ interface Props<T extends TableRowData> {
     pageNumber: number;
     hasNextPage: boolean;
     setPageNumber: React.Dispatch<React.SetStateAction<number>>;
-    staticColumnKey?: string;
+    // staticColumnKey?: string;
     rowsPerPage: number;
     setRowsPerPage: (pageNumber: number) => void;
 }
@@ -100,7 +100,7 @@ function DataTable<T extends TableRowData>({
                                                pageNumber,
                                                hasNextPage,
                                                setPageNumber,
-                                               staticColumnKey,
+                                               // staticColumnKey,
                                                rowsPerPage,
                                                setRowsPerPage,
                                            }: Props<T>) {
@@ -125,18 +125,18 @@ function DataTable<T extends TableRowData>({
         (validPageNumber + 1) * safeRowsPerPage
     );
 
-
-    const handlePageChange = (_: React.ChangeEvent<unknown>, newPage: number) => {
-        setPageNumber(newPage - 1);
-    };
+    //
+    // const handlePageChange = (_: React.ChangeEvent<unknown>, newPage: number) => {
+    //     setPageNumber(newPage - 1);
+    // };
 
     const handleNextPage = () => {
         if (hasNextPage) setPageNumber((prev) => prev + 1);
     };
 
-    const handlePreviousPage = () => {
-        if (pageNumber > 0) setPageNumber((prev) => prev - 1);
-    };
+    // const handlePreviousPage = () => {
+    //     if (pageNumber > 0) setPageNumber((prev) => prev - 1);
+    // };
 
     const handleDropdownOpen = () => setDropdownOpen(!dropdownOpen);
 
