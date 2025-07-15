@@ -1,6 +1,6 @@
-
+import '@testing-library/react'
 import { render, screen, fireEvent } from '@testing-library/react';
-import Login from '@/features/auth/login'; // adjust path based on where your file is
+import Login from '@/features/auth/login';
 import { useRouter } from 'next/navigation';
 
 jest.mock('next/navigation', () => ({
