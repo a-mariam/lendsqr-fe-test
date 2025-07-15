@@ -45,6 +45,7 @@ interface TableRowData {
 interface DropdownOption {
     name: string;
     id: string;
+    icon?: React.ReactNode;
 }
 
 interface Props<T extends TableRowData> {
@@ -204,24 +205,47 @@ function DataTable<T extends TableRowData>({
                                             ))}
                                             {showKirkBabel && (
                                                 <TableCell className={`w-0 ${isLastPage ? "border-b" : ""}`}>
-                                                    <Menubar>
-                                                        <MenubarMenu>
-                                                            <MenubarTrigger asChild className="border-none shadow-none cursor-pointer">
-                                                                <Button className="border-none shadow-none">
-                                                                    <DotsVerticalIcon className="w-5 h-6 text-grey500 font-extrabold" />
-                                                                </Button>
-                                                            </MenubarTrigger>
-                                                            <MenubarContent className="bg-white shadow-md rounded-md mr-11 relative bottom-6 min-w-[8rem] mt-3">
-                                                                {kirkBabDropdownOption?.map((option, index) => (
-                                                                    <MenubarItem key={index} className={`cursor-pointer mt-2 pr-8 ${option.id === "3" ? "text-error500 focus:text-error500" : ""}`} onClick={() => handleDropDownClick?.(option.id, row)}>
-                                                                        {option.name}
-                                                                    </MenubarItem>
-                                                                ))}
-                                                            </MenubarContent>
-                                                        </MenubarMenu>
-                                                    </Menubar>
-                                                </TableCell>
-                                            )}
+                                                    {
+                                                        <Menubar
+                                                            className={`border-none shadow-none ring-0 focus:outline-none  bg-white focus:bg-white`}
+                                                        >
+                                                            <MenubarMenu >
+                                                                <MenubarTrigger
+                                                                    asChild
+                                                                    className={` border-none shadow-none ring-0 focus:bg-white focus:outline-none  `}
+                                                                >
+                                                                    <div
+                                                                        className={`border-none shadow-none ring-0 focus:outline-none  bg-white focus:bg-white `}
+                                                                        style={{ border: "none", boxShadow: "none", outline: "none" }}
+                                                                    >
+                                                                        <DotsVerticalIcon className="w-6 h-6 text-[#545F7D] " />
+                                                                    </div>
+                                                                </MenubarTrigger>
+                                                                <MenubarContent className="bg-white shadow-md rounded-md mr-11 relative bottom-6 min-w-[8rem] mt-3">
+                                                                    {kirkBabDropdownOption?.map(
+                                                                        (option, index) => (
+                                                                            <MenubarItem
+                                                                                id={`${index}optionItem`}
+                                                                                key={index}
+                                                                                className={`cursor-pointer text-[#545F7D] mt-2 pr-8  ${
+                                                                                    option.id === "3"
+                                                                                        ? "text-error500 focus:text-error500"
+                                                                                        : ""
+                                                                                }`}
+                                                                                onClick={() =>
+                                                                                    handleDropDownClick &&
+                                                                                    handleDropDownClick(option.id, row)
+                                                                                }
+                                                                            >
+                                                                                {option?.icon}
+                                                                                {option.name}
+                                                                            </MenubarItem>
+                                                                        )
+                                                                    )}
+                                                                </MenubarContent>
+                                                            </MenubarMenu>
+                                                        </Menubar>
+                                                    }
                                         </TableRow>
                                     ))}
                                 </TableBody>
