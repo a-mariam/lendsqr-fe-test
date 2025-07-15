@@ -6,7 +6,7 @@ interface LayoutState {
 }
 
 const initialState: LayoutState = {
-    currentTab: '',
+    currentTab: 'Users',
     showMobileSidebar: false,
 }
 
