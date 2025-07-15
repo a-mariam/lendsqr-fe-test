@@ -8,6 +8,13 @@ export const workSans500 =  Work_Sans({
     weight: '500',
     preload: false
 })
+export const workSans600 =  Work_Sans({
+    subsets: ['latin'],
+    display: 'swap',
+    style: 'normal',
+    weight: '600',
+    preload: false
+})
 export const workSans =  Work_Sans({
     subsets: ['latin'],
     display: 'swap',
