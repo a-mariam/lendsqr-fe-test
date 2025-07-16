@@ -10,7 +10,7 @@ const Login = () => {
 
     const router = useRouter();
     // const [disableButton, setDisableButton] = React.useState(true);
-    const [email, setEmail] = React.useState<string>('');
+    const [ setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
     const [validEmail, setValidEmail] = useState(false)
     const validateEmailInput = (input: string ) => {
