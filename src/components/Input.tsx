@@ -17,7 +17,8 @@ interface ReusableInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const AuthInputField: React.FC<ReusableInputProps> = ({label,height,width, id, endAdornment, type, errorMessage, ...props}) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-    const handleToggleVisibility = () => {
+    const handleToggleVisibility = (e?:React.MouseEvent<HTMLButtonElement>) => {
+        e?.preventDefault();
         setIsPasswordVisible(!isPasswordVisible);
     };
 
@@ -26,7 +27,7 @@ const AuthInputField: React.FC<ReusableInputProps> = ({label,height,width, id, e
             return (
                 <button id={`end-adornment-${id}`}
                       className={`text-[#39CDCC] ${AvenirNext600.className} cursor-pointer flex justify-center items-center mr-3.5 text-[12px] font-normal leading-[22px] select-none`}
-                      onClick={handleToggleVisibility}>
+                      onClick={ (e) => {handleToggleVisibility(e)}}>
                     {isPasswordVisible ? 'HIDE' : 'SHOW'}
                 </button>
             );
@@ -42,7 +43,7 @@ const AuthInputField: React.FC<ReusableInputProps> = ({label,height,width, id, e
                     data-testid={id}
                     placeholder={label}
                     type={isPasswordVisible ? 'text' : type}
-                    className={`${inter.className} focus-visible:ring-0  w-full h-full border-0 text-[#cdd1da] text-[12px] bg-white placeholder:text-[14px] placeholder:text-[#cdd1da] data-[placeholder]:bg-[#cdd1da] data-[placeholder]:text-[8px] focus:outline-none`}
+                    className={`${inter.className} focus-visible:ring-0  w-full h-full border-0 text-[#84848c] text-[12px] bg-white placeholder:text-[14px] placeholder:text-[#84848c] data-[placeholder]:bg-[#84848c] data-[placeholder]:text-[10px] focus:outline-none`}
                     {...props}
                 />
                 {renderEndAdornment()}

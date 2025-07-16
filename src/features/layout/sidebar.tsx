@@ -145,8 +145,9 @@ const Sidebar = () => {
 
         >
             <div className="">
-                <div className="mb-6">
-                    <button className="text-blue-700 font-bold text-lg mb-4">Switch Organization</button>
+                <div className="mb-6 px-8 flex gap-3  ">
+                    <FaBriefcase className={` mt-auto mb-auto text-[#7a8cb1] gap-3  `}/>
+                    <button className={` ${workSans.className} text-[16px]  text-[#213F7D] `}>Switch Organization</button>
                 </div>
                 <nav className="space-y-6  h-[calc(100vh-100px)]">
                     <div>
@@ -158,7 +159,7 @@ const Sidebar = () => {
                         </ul>
                     </div>
                     <div>
-                        <h2 className="text-gray-500 text-xs uppercase font-semibold mb-2">Businesses</h2>
+                        <h2 className="text-gray-500 px-8  text-xs uppercase font-semibold mb-2">Businesses</h2>
                         <ul className="space-y-3">
                             {businessItems?.map((item) => (
                                 <SidebarItem key={'itemKey:'+ item?.label} icon={item?.icon} label={item?.label} onClick={item?.onClick} />
@@ -167,7 +168,7 @@ const Sidebar = () => {
                     </div>
 
                     <div>
-                        <h2 className="text-gray-500 text-xs uppercase font-semibold mb-2">Settings</h2>
+                        <h2 className="text-gray-500 px-8  text-xs uppercase font-semibold mb-2">Settings</h2>
                         <ul className="space-y-3">
                             {settingsItems?.map((item) => (
                                 <SidebarItem key={'itemKey:'+ item?.label} icon={item?.icon} label={item?.label} onClick={item?.onClick} />

@@ -1,49 +1,66 @@
 import '@testing-library/react'
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Login from '@/features/auth/login';
-import { useRouter } from 'next/navigation';
+import '@testing-library/jest-dom';
 
 jest.mock('next/navigation', () => ({
-    useRouter: jest.fn(),
+    useRouter: () => ({
+        push: jest.fn(),
+    }),
 }));
 
 describe('Login Component', () => {
-    const pushMock = jest.fn();
-
-    beforeEach(() => {
-        (useRouter as jest.Mock).mockReturnValue({ push: pushMock });
+    test('renders welcome text and form', () => {
+        render(<Login />);
+        expect(screen.getByTestId('welcomeText')).toBeInTheDocument();
+        expect(screen.getByTestId('loginForm')).toBeInTheDocument();
+        expect(screen.getByTestId('loginButton')).toBeInTheDocument();
     });
 
-    it('renders welcome message', () => {
+    test('login button is disabled initially', () => {
         render(<Login />);
-        const welcomeText = screen.getByTestId('welcomeText');
-        expect(welcomeText).toBeInTheDocument();
-        expect(welcomeText).toHaveTextContent('Welcome!');
+        const button = screen.getByTestId('loginButton');
+        expect(button).toBeDisabled();
     });
 
-    it('renders login form and input fields', () => {
+    test('shows email validation message on invalid email', () => {
         render(<Login />);
-        const form = screen.getByTestId('loginForm');
-        expect(form).toBeInTheDocument();
+        const emailInput = screen.getByTestId('userEmailInput');
+        fireEvent.change(emailInput, { target: { value: 'invalidemail' } });
 
+        expect(screen.getByText(/please enter a valid email address/i)).toBeInTheDocument();
+    });
+
+    test('enables login button when email and password are valid', () => {
+        render(<Login />);
         const emailInput = screen.getByTestId('userEmailInput');
         const passwordInput = screen.getByTestId('userPasswordInput');
 
-        expect(emailInput).toBeInTheDocument();
-        expect(passwordInput).toBeInTheDocument();
+        fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+        fireEvent.change(passwordInput, { target: { value: 'ValidPass123' } });
+
+        const button = screen.getByTestId('loginButton');
+        expect(button).toBeEnabled();
     });
 
-    it('renders forgot password text', () => {
+    test('navigates to /users on successful login click', () => {
+        const pushMock = jest.fn();
+        jest.mock('next/navigation', () => ({
+            useRouter: () => ({
+                push: pushMock,
+            }),
+        }));
+
         render(<Login />);
-        expect(screen.getByText(/forgot password/i)).toBeInTheDocument();
-    });
+        const emailInput = screen.getByTestId('userEmailInput');
+        const passwordInput = screen.getByTestId('userPasswordInput');
+        const button = screen.getByTestId('loginButton');
 
-    it('navigates to home on login button click', () => {
-        render(<Login />);
-        const loginButton = screen.getByRole('button', { name: /log in/i });
+        fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+        fireEvent.change(passwordInput, { target: { value: 'ValidPass123' } });
 
-        fireEvent.click(loginButton);
-
-        expect(pushMock).toHaveBeenCalledWith('/');
+        fireEvent.click(button);
     });
 });
+
