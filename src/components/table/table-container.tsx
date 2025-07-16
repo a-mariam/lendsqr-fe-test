@@ -18,7 +18,6 @@ import {
     SelectGroup,
 } from "@/components/ui/select";
 import {        DotsVerticalIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { Button } from "@/components/ui/button";
 import {
     Menubar,
     MenubarTrigger,
@@ -108,13 +107,15 @@ function DataTable<T extends TableRowData>({
 
     const [selectedColumn, setSelectedColumn] = useState(tableHeader[1].id);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    // const [isMounted, setIsMounted] = useState(false);
+    //
+    // useEffect(() => {
+    //     setIsMounted(true);
+    // }, []);
+    //
+    // if (!isMounted) return null;
     const [isMounted, setIsMounted] = useState(false);
-    console.log('pageNumber: ', pageNumber)
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
+    useEffect(() => setIsMounted(true), []);
     if (!isMounted) return null;
     const safeRowsPerPage = rowsPerPage && rowsPerPage > 0 ? rowsPerPage : 10;
 
@@ -126,18 +127,13 @@ function DataTable<T extends TableRowData>({
         (validPageNumber + 1) * safeRowsPerPage
     );
 
-    //
-    // const handlePageChange = (_: React.ChangeEvent<unknown>, newPage: number) => {
-    //     setPageNumber(newPage - 1);
-    // };
+
 
     const handleNextPage = () => {
         if (hasNextPage) setPageNumber((prev) => prev + 1);
     };
 
-    // const handlePreviousPage = () => {
-    //     if (pageNumber > 0) setPageNumber((prev) => prev - 1);
-    // };
+
 
     const handleDropdownOpen = () => setDropdownOpen(!dropdownOpen);
 
@@ -164,7 +160,6 @@ function DataTable<T extends TableRowData>({
     };
 
     const isLastPage = pageNumber + 1 === totalPages;
-    // const staticColumn = tableHeader.find((header) => header.id === staticColumnKey);
     return (
         <div className="w-full">
             {isLoading ? (
@@ -184,7 +179,7 @@ function DataTable<T extends TableRowData>({
                                     <TableRow className="bg-white ">
                                         {tableHeader.map((column) => (
                                             <TableHead key={column.id} className="bg-white  h-fit py-6">
-                                                <div className={`${workSans600.className} flex gap-2 text-[#545F7D] text-[12px] `}>
+                                                <div id={column.id} data-testid={column.id} className={`${workSans600.className} flex gap-2 text-[#545F7D] text-[12px] `}>
                                                     {column.title}
                                                     <IoFilterSharp className={`text-[#545F7D] mt-auto mb-auto `} />
                                                 </div>
@@ -197,7 +192,9 @@ function DataTable<T extends TableRowData>({
                                     {paginatedData.map((row, rowIndex) => (
                                         <TableRow key={rowIndex} className={sx}>
                                             {tableHeader.map((column) => (
-                                                <TableCell key={`${column.id}${rowIndex}`} onClick={() => handleRowClick(row)} className={`h-1 ${isLastPage ? "border-b" : ""} ${tableCellStyle} overflow-hidden whitespace-nowrap text-ellipsis max-w-[80px]`}>
+                                                <TableCell
+                                                    id={column.title?.toString()} data-testid={column.title?.toString()}
+                                                    key={`${column.id}${rowIndex}`} onClick={() => handleRowClick(row)} className={`h-1 ${isLastPage ? "border-b" : ""} ${tableCellStyle} overflow-hidden whitespace-nowrap text-ellipsis max-w-[80px]`}>
                                                     <div className={`${styles.tableBodyItem} ${tableStyle} h-fit py-3  text-[#545F7D]  text-[14px]  ${workSans.className}  truncate`}>
                                                         {renderCellContent(column, row)}
                                                     </div>
@@ -271,6 +268,7 @@ function DataTable<T extends TableRowData>({
                                 <TableHeader className="sticky top-0 bg-white">
                                     <TableRow className={` h-fit py-6`}>
                                         <TableHead
+                                            id={staticHeader?.toString()} data-testid={staticHeader?.toString()}
                                             className={`${workSans600.className} f mt-auto mb-auto py-4  text-[#545F7D] text-[16px]`}
                                         >{staticHeader}</TableHead>
                                         <TableHead>
@@ -281,16 +279,19 @@ function DataTable<T extends TableRowData>({
                                             >
                                                 <SelectTrigger className={`h-4 border-none focus:ring-0 ${workSans600.className} f mt-auto mb-auto text-[#545F7D] text-[16px]`}>
                                                     <div className="truncate max-w-[120px]">
-                                                        <SelectValue className={`${workSans600.className} f mt-auto mb-auto text-[#545F7D] text-[16px]`} placeholder="Select" />
+                                                        <SelectValue
+                                                            className={`${workSans600.className} f mt-auto mb-auto text-[#545F7D] text-[16px]`} placeholder="Select" />
                                                     </div>
                                                     {/*<div className="ml-4">*/}
                                                     {/*    {dropdownOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}*/}
                                                     {/*</div>*/}
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectGroup>
+                                                    <SelectGroup >
                                                         {tableHeader.filter((header) => header.id !== staticColunm).map((header) => (
-                                                            <SelectItem className={`${workSans600.className}  mt-auto mb-auto text-[#545F7D] text-[16px]`} key={header.id} value={header.id}>{header.title}</SelectItem>
+                                                            <SelectItem
+                                                                id={header.title?.toString()} data-testid={header.title?.toString()}
+                                                                className={`${workSans600.className}  mt-auto mb-auto text-[#545F7D] text-[16px]`} key={header.id} value={header.id}>{header.title}</SelectItem>
                                                         ))}
                                                     </SelectGroup>
                                                 </SelectContent>
