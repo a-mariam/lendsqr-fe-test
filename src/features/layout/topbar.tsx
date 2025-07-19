@@ -19,8 +19,8 @@ const Topbar = () => {
     }
 
     return (
-        <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky grid grid-cols-2 top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBar}`}>
-            <div className={`w-[52vw]  lg:flex lg:justify-between  md:flex md:justify-between  md:pl-6 lg:pl-6  h-fit self-center flex justify-between `}>
+        <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky flex justify-between top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBar}`}>
+            <div className={`w-fit   lg:flex lg:justify-between  md:flex md:justify-between  md:pl-6 lg:pl-6  h-fit self-center flex justify-between `}>
                 <div className={`md:hidden lg:hidden flex gap-3 `}>
                     <IoMdMenu className={`md:hidden lg:hidden flex mt-auto mb-auto`} color='#213F7D' style={{ height: '1.5rem', width: '1.5rem' }}
                               onClick={openMobileSidebar}
@@ -39,7 +39,9 @@ const Topbar = () => {
                         className={`w-[90%] h-full`}
                     />
                 </div>
-                <div className=" w-[55%] sm:hidden  md:flex lg:flex hidden  ">
+            </div>
+            <div className={`md:w-[80vw] lg:w-[80vw]  md:px-8 md:flex md:justify-between md:items-center  order-last   `}>
+                <div className=" w-[39%] sm:hidden md:mt-auto md:mb-auto   md:flex lg:flex hidden  ">
                     <div className="relative w-full justify-end ">
                         <Input
                             id={'searchInput'}
@@ -53,19 +55,20 @@ const Topbar = () => {
                         </button>
                     </div>
                 </div>
-            </div>
-            <div className={`  self-center h-fit md:pr-20 flex justify-end w-full`}>
-                <div className={` flex gap-8`}>
-                    <p className={`md:flex lg:flex hidden ${Roboto400.className} underline text-[16px] text-[#213F7D] mt-auto mb-auto  `}>Docs</p>
-                    <BellIcon data-testid={'notificationIcon'} id={'notificationIcon'} className={` mt-auto mb-auto h-6 w-6 text-[#213F7D]  `}/>
-                    <div className={`flex gap-2`}>
-                        <Avatar className={`w-12 h-12`}>
-                            <AvatarImage  src="https://github.com/shadcn.png" />
-                            <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                        <div className={`md:flex lg:flex hidden gap-2 `}>
-                            <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans500.className} text-[16px]  text-[#213F7D] `}>Adedeji</p>
-                            <MdArrowDropDown className={` text-[#213F7D] h-4 w-4  mt-auto mb-auto`} />
+
+                <div className={` h-full  md:h-fit lg:h-fit   mt-auto mb-auto flex items-center  `}>
+                    <div className={`   flex gap-8`}>
+                        <p className={`md:flex pr-5 lg:flex hidden ${Roboto400.className} underline text-[16px] text-[#213F7D] mt-auto mb-auto  `}>Docs</p>
+                        <BellIcon data-testid={'notificationIcon'} id={'notificationIcon'} className={` mt-auto mb-auto h-6 w-6 text-[#213F7D]  `}/>
+                        <div className={`flex  gap-2`}>
+                            <Avatar className={`w-12 h-12`}>
+                                <AvatarImage  src="https://github.com/shadcn.png" />
+                                <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
+                            <div className={`md:flex  lg:flex hidden gap-2 `}>
+                                <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans500.className} text-[16px]  text-[#213F7D] `}>Adedeji</p>
+                                <MdArrowDropDown className={` text-[#213F7D] h-4 w-4  mt-auto mb-auto`} />
+                            </div>
                         </div>
                     </div>
                 </div>
