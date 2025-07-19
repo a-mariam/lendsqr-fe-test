@@ -149,7 +149,7 @@ const Sidebar = () => {
                     <FaBriefcase className={` mt-auto mb-auto text-[#7a8cb1] gap-3  `}/>
                     <button className={` ${workSans.className} text-[16px]  text-[#213F7D] `}>Switch Organization</button>
                 </div>
-                <div className={` pb-4  `}>
+                <div className={` pb-8  `}>
                     <SidebarItem key={'itemKey:Dashboard'} icon={<FaHouseChimney />} label={'Dashboard'} onClick={false} />
                 </div>
                 <nav className="space-y-6  h-[calc(100vh-100px)]">
