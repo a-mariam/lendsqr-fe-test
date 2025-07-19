@@ -14,6 +14,7 @@ import Image from "next/image";
 import Moneybag from "@/components/icons/moneybag";
 import { FaRegHandshake, FaUserXmark } from "react-icons/fa6";
 import ReceiveMoney from "@/components/icons/ReceiveMoney";
+import { FaHouseChimney } from "react-icons/fa6";
 
 
 const Sidebar = () => {
@@ -73,7 +74,6 @@ const Sidebar = () => {
                 onClick={()=> {onClickMobileSidebarItem(onClick ? label : '')}}
             >
                 <div
-                    // href="#"
                     className={`flex items-center px-8  gap-3  py-2  hover:border-l-3 hover:border-l-[#39CDCC] hover:bg-[#f3fcfc] transition ${
                         active || currentSideBarItem === label ? 'bg-[#f3fcfc] text-[#213F7D]  border-l-3 border-l-[#39CDCC] bg-[#f3fcfc] font-semibold' : 'text-[#7a8cb1]'
                     }`}
@@ -140,14 +140,17 @@ const Sidebar = () => {
              </aside>
          )}
         <aside
-            className={` ${styles.mainContainerOverflowStyles} md:grid lg:grid hidden grid w-[16vw]  md:w-[20vw] b max-h-[87vh] overflow-hidden  bg-white -md `}
+            className={` ${styles.mainContainerOverflowStyles} md:grid lg:grid hidden  w-[16vw]  md:w-[20vw] b max-h-[87vh] overflow-hidden  bg-white -md `}
             // className={`hidden md:grid  md:bg-meedlWhite md:content-between md:w-[16vw]  md:px-4  md:py-6 md:border-r md:border-r-[blue300] md:z-0 md:h-[100%]`}
 
         >
             <div className="">
-                <div className="mb-6 px-8 flex gap-3  ">
+                <div className="mb-6 px-8 pt-8  flex gap-3  ">
                     <FaBriefcase className={` mt-auto mb-auto text-[#7a8cb1] gap-3  `}/>
                     <button className={` ${workSans.className} text-[16px]  text-[#213F7D] `}>Switch Organization</button>
+                </div>
+                <div className={` pb-4  `}>
+                    <SidebarItem key={'itemKey:Dashboard'} icon={<FaHouseChimney />} label={'Dashboard'} onClick={false} />
                 </div>
                 <nav className="space-y-6  h-[calc(100vh-100px)]">
                     <div>

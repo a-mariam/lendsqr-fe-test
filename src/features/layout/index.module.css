@@ -9,3 +9,13 @@
     box-shadow: rgba(0, 0, 0, 0.04) 0 3px 5px;
 }
 
+.topBarMobile{
+    background-color: white;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .topBarMobile{
+        box-shadow: rgba(0, 0, 0, 0.04) 0 3px 5px;
+    }
+}

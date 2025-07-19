@@ -19,7 +19,7 @@ const Topbar = () => {
     }
 
     return (
-        <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky flex justify-between top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBar}`}>
+        <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky flex justify-between top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBarMobile} `}>
             <div className={`w-fit   lg:flex lg:justify-between  md:flex md:justify-between  md:pl-6 lg:pl-6  h-fit self-center flex justify-between `}>
                 <div className={`md:hidden lg:hidden flex gap-3 `}>
                     <IoMdMenu className={`md:hidden lg:hidden flex mt-auto mb-auto`} color='#213F7D' style={{ height: '1.5rem', width: '1.5rem' }}
@@ -40,7 +40,7 @@ const Topbar = () => {
                     />
                 </div>
             </div>
-            <div className={`md:w-[80vw] lg:w-[80vw]  md:px-8 md:flex md:justify-between md:items-center  order-last   `}>
+            <div className={`md:w-[80vw] ${styles.topBar}  lg:w-[80vw]  md:px-8 md:flex md:justify-between md:items-center  order-last   `}>
                 <div className=" w-[39%] sm:hidden md:mt-auto md:mb-auto   md:flex lg:flex hidden  ">
                     <div className="relative w-full justify-end ">
                         <Input
