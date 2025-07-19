@@ -277,7 +277,7 @@ function DataTable<T extends TableRowData>({
                                                 onValueChange={(val: string) => setSelectedColumn(val)}
                                                 onOpenChange={handleDropdownOpen}
                                             >
-                                                <SelectTrigger className={`h-4 border-none focus:ring-0 ${workSans600.className} f mt-auto mb-auto text-[#545F7D] text-[16px]`}>
+                                                <SelectTrigger className={`h-4 border-none focus:border-none focus:ring-0 ${workSans600.className} f mt-auto mb-auto text-[#545F7D] text-[16px]`}>
                                                     <div className="truncate max-w-[120px]">
                                                         <SelectValue
                                                             className={`${workSans600.className} f mt-auto mb-auto text-[#545F7D] text-[16px]`} placeholder="Select" />
