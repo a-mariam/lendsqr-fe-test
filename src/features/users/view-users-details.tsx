@@ -2,6 +2,7 @@ import React from 'react';
 import { HiOutlineArrowLongLeft } from "react-icons/hi2";
 import {workSans, workSans500, workSans600} from "@/app/fonts";
 import { Button } from '@/components/ui/button';
+import UserDetailsHeader from "@/components/cards/UserDetailsHeader";
 
 const ViewUsersDetails = () => {
     return (
@@ -20,6 +21,9 @@ const ViewUsersDetails = () => {
                        <Button id={'blackListUserButton'} data-testid={'blackListUserButton'} className={` ${workSans600.className} bg-white text-[14px] rounded-md  text-[#E4033B] border border-[#E4033B] `}>BLACKLIST USER</Button>
                        <Button id={'activateUserButton'} data-testid={'activateUserButton'} className={` ${workSans600.className} bg-white text-[14px] rounded-md text-[#39CDCC] border border-[#39CDCC] `}>ACTIVATE USER</Button>
                    </div>
+               </div>
+               <div>
+                   <UserDetailsHeader/>
                </div>
            </div>
 

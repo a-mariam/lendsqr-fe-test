@@ -1,5 +1,13 @@
-import { IBM_Plex_Sans, Inter,Roboto,Work_Sans} from 'next/font/google';
+import { IBM_Plex_Sans, Inter,Roboto,Work_Sans, Roboto_Mono } from 'next/font/google';
 import localFont from "next/font/local";
+
+export const RobotoMono =  Roboto_Mono({
+    subsets: ['latin'],
+    display: 'swap',
+    style: 'normal',
+    weight: '400',
+    preload: false
+})
 
 export const workSans500 =  Work_Sans({
     subsets: ['latin'],
