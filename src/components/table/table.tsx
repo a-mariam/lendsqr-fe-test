@@ -5,6 +5,7 @@ import {mockData} from "@/util/mock-datas/table";
 import {MdOutlineRemoveRedEye} from "react-icons/md";
 import {FaUserCheck} from "react-icons/fa";
 import {FaUserXmark} from "react-icons/fa6";
+import {useRouter} from "next/navigation";
 
 
 
@@ -24,9 +25,10 @@ type viewAllUsers = viewUser & TableRowData;
 const Table = () => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    
-    const rowClick = () => {
+    const router = useRouter();
 
+    const rowClick = (row: string | object | React.ReactNode) => {
+        router.push("/users/details");
     }
     const tableHeader = [
         { id: "organization", title: "ORGANIZATION", selector: (row:  viewAllUsers) =>row.organization},

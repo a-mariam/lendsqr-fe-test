@@ -107,12 +107,6 @@ function DataTable<T extends TableRowData>({
 
     const [selectedColumn, setSelectedColumn] = useState(tableHeader[1].id);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    // const [isMounted, setIsMounted] = useState(false);
-    //
-    // useEffect(() => {
-    //     setIsMounted(true);
-    // }, []);
-    //
     // if (!isMounted) return null;
     const [isMounted, setIsMounted] = useState(false);
     useEffect(() => setIsMounted(true), []);
@@ -179,7 +173,7 @@ function DataTable<T extends TableRowData>({
                                     <TableRow className="bg-white ">
                                         {tableHeader.map((column) => (
                                             <TableHead key={column.id} className="bg-white  h-fit py-6">
-                                                <div id={column.id} data-testid={column.id} className={`${workSans600.className} flex gap-2 text-[#545F7D] text-[12px] `}>
+                                                <div id={column.id} data-testid={column.id} className={`${workSans600.className} flex   gap-2 text-[#545F7D] text-[12px] `}>
                                                     {column.title}
                                                     <IoFilterSharp className={`text-[#545F7D] mt-auto mb-auto `} />
                                                 </div>
@@ -190,11 +184,12 @@ function DataTable<T extends TableRowData>({
                                 </TableHeader>
                                 <TableBody className={`bg-white `}>
                                     {paginatedData.map((row, rowIndex) => (
-                                        <TableRow key={rowIndex} className={sx}>
+                                        <TableRow key={rowIndex}  className={sx}>
                                             {tableHeader.map((column) => (
                                                 <TableCell
+                                                    onClick={() => handleRowClick(row)}
                                                     id={column.title?.toString()} data-testid={column.title?.toString()}
-                                                    key={`${column.id}${rowIndex}`} onClick={() => handleRowClick(row)} className={`h-1 ${isLastPage ? "border-b" : ""} ${tableCellStyle} overflow-hidden whitespace-nowrap text-ellipsis max-w-[80px]`}>
+                                                    key={`${column.id}${rowIndex}`}  className={`h-1 ${isLastPage ? "border-b" : ""} ${tableCellStyle} overflow-hidden whitespace-nowrap text-ellipsis max-w-[80px]`}>
                                                     <div className={`${styles.tableBodyItem} ${tableStyle} h-fit py-3  text-[#545F7D]  text-[14px]  ${workSans.className}  truncate`}>
                                                         {renderCellContent(column, row)}
                                                     </div>
