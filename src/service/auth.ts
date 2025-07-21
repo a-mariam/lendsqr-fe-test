@@ -14,9 +14,15 @@ export const authApi = createApi({
                 body: data
             }),
         }),
+        getAllUsers: builder.query({
+            query: (limit: number | string) => ({
+                url:`/users?limit=${limit}`,
+                method:'GET'
+            })
+        })
 
 
     })
 })
 
-export const {useLoginMutation} = authApi;
+export const {useLoginMutation, useGetAllUsersQuery} = authApi;

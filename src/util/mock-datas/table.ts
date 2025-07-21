@@ -57,6 +57,10 @@ function getRandomItem<T>(arr: T[]): T {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
+export function getRandomStatusItem()  {
+    return statuses[Math.floor(Math.random() * statuses.length)];
+}
+
 function generatePhone(index: number): string {
     const base = "07000000000";
     return base.substring(0, 6) + (index + 1000).toString();

@@ -7,6 +7,8 @@ import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import { useLoginMutation } from '@/service/auth';
 import {setItemSessionStorage} from "@/util/storage";
+import {store} from "@/redux/store";
+import {setUserData, UserDataType} from "@/redux/slice/layoutSlice";
 const Login = () => {
 
     const router = useRouter();
@@ -23,14 +25,23 @@ const Login = () => {
 
     const handleClick = async (e?:React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault()
-        // const data = {email: validEmail, password: password}
         const response  =  await loginMutation({username: 'emilys', password: 'emilyspass'})
         console.log('response', response)
         if(response?.data){
-            setItemSessionStorage('accessToken',response.data.accessToken)
+            setItemSessionStorage('accessToken',response?.data?.accessToken)
+            const userData : UserDataType  = {
+                userEmail: response?.data?.email,
+                userID: response?.data?.id,
+                useName: response?.data?.username,
+                firstName: response?.data?.firstName,
+                lastName: response?.data?.lastName,
+                image:response?.data?.image,
+                gender: response?.data?.gender,
+            }
+            store.dispatch(setUserData(userData))
+            router.push("/users");
 
         }
-        router.push("/users");
     }
     const validateEmail = (input: string) => {
         const isValid = validateEmailInput(input);

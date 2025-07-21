@@ -9,7 +9,7 @@ import {setupListeners} from "@reduxjs/toolkit/query";
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: []
+    whitelist: ['layout']
 };
 
 const persistedReducer = persistReducer(persistConfig, appReducer);

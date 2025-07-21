@@ -1,10 +1,14 @@
+
 import React from 'react';
 import Table from "@/components/table/table";
 import {workSans500} from "@/app/fonts";
 import Card, {CardProps} from "@/components/cards/card";
 import styles from "@/features/index.module.css"
+import { useGetAllUsersQuery } from '@/service/auth';
 
 const ViewAllUser = () => {
+
+
     const cardItems : CardProps []= [
         {name: 'USERS', id: 'users', imageUrl: '/Couple.svg',imageBackgroundColor: '#fce8ff', itemAmount: 1212},
         {name: 'ACTIVE USERS ', id: 'activeUsers', imageUrl: '/People.svg',imageBackgroundColor: '#efe8ff',itemAmount: 1212},

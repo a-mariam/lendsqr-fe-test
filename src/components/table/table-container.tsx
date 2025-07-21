@@ -113,10 +113,10 @@ function DataTable<T extends TableRowData>({
     if (!isMounted) return null;
     const safeRowsPerPage = rowsPerPage && rowsPerPage > 0 ? rowsPerPage : 10;
 
-    const maxPage = Math.ceil(tableData.length / safeRowsPerPage);
+    const maxPage = Math.ceil(tableData?.length / safeRowsPerPage);
     const validPageNumber = Math.min(pageNumber, maxPage - 1);
 
-    const paginatedData = tableData.slice(
+    const paginatedData = tableData?.slice(
         validPageNumber * safeRowsPerPage,
         (validPageNumber + 1) * safeRowsPerPage
     );
@@ -142,7 +142,7 @@ function DataTable<T extends TableRowData>({
     };
 
     const renderCellContent = (column: ColumnProps<T>, row: T) => {
-        const value = column.selector ? column.selector(row) : row[column.id];
+        const value = column?.selector ? column?.selector(row) : row[column.id];
         if (column.id === "status" && typeof value === "string") {
             return (
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusClass(value)}`}>{value}</span>
@@ -158,7 +158,7 @@ function DataTable<T extends TableRowData>({
         <div className="w-full">
             {isLoading ? (
                 <TableSkeleton />
-            ) : tableData.length === 0 ? (
+            ) : tableData?.length === 0 ? (
                 searchEmptyState ? (
                     <TableEmptyState icon={<MagnifyingGlassIcon />} name={sideBarTabName} className={emptyStateStyle} optionalFilterName={optionalFilterName} condition={condition} isSearch />
                 ) : (
@@ -171,10 +171,10 @@ function DataTable<T extends TableRowData>({
                             <Table>
                                 <TableHeader className="bg-white sticky top-0">
                                     <TableRow className="bg-white ">
-                                        {tableHeader.map((column) => (
+                                        {tableHeader?.map((column) => (
                                             <TableHead key={column.id} className="bg-white  h-fit py-6">
-                                                <div id={column.id} data-testid={column.id} className={`${workSans600.className} flex   gap-2 text-[#545F7D] text-[12px] `}>
-                                                    {column.title}
+                                                <div id={column?.id} data-testid={column.id} className={`${workSans600.className} flex   gap-2 text-[#545F7D] text-[12px] `}>
+                                                    {column?.title}
                                                     <IoFilterSharp className={`text-[#545F7D] mt-auto mb-auto `} />
                                                 </div>
                                             </TableHead>
@@ -183,7 +183,7 @@ function DataTable<T extends TableRowData>({
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody className={`bg-white `}>
-                                    {paginatedData.map((row, rowIndex) => (
+                                    {paginatedData?.map((row, rowIndex) => (
                                         <TableRow key={rowIndex}  className={sx}>
                                             {tableHeader.map((column) => (
                                                 <TableCell
@@ -247,9 +247,9 @@ function DataTable<T extends TableRowData>({
                         </div>
                         <Pagination
                             currentPage={pageNumber + 1}
-                            totalPages={Math.ceil(tableData.length / rowsPerPage)}
+                            totalPages={Math.ceil(tableData?.length / rowsPerPage)}
                             pageSize={rowsPerPage}
-                            totalItems={tableData.length}
+                            totalItems={tableData?.length}
                             onPageChange={(page) => setPageNumber(page - 1)}
                             handleNext={handleNextPage}
                             setRowsPerPage={setRowsPerPage}
@@ -283,7 +283,7 @@ function DataTable<T extends TableRowData>({
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectGroup >
-                                                        {tableHeader.filter((header) => header.id !== staticColunm).map((header) => (
+                                                        {tableHeader?.filter((header) => header.id !== staticColunm).map((header) => (
                                                             <SelectItem
                                                                 id={header.title?.toString()} data-testid={header.title?.toString()}
                                                                 className={`${workSans600.className}  mt-auto mb-auto text-[#545F7D] text-[16px]`} key={header.id} value={header.id}>{header.title}</SelectItem>
@@ -295,7 +295,7 @@ function DataTable<T extends TableRowData>({
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {paginatedData.map((row, rowIndex) => (
+                                    {paginatedData?.map((row, rowIndex) => (
                                         <TableRow key={rowIndex} className={`h-fit py-3  text-[#545F7D] py-4 h-fit  text-[14px]  ${workSans.className}`} onClick={() => handleRowClick(row)}>
                                             <TableCell className="truncate px-4 py-2">
                                                 {renderCellContent(
@@ -305,7 +305,7 @@ function DataTable<T extends TableRowData>({
                                             </TableCell>
                                             <TableCell className="truncate px-4 py-4">
                                                 {renderCellContent(
-                                                    tableHeader.find((h) => h.id === selectedColumn)!,
+                                                    tableHeader?.find((h) => h.id === selectedColumn)!,
                                                     row
                                                 )}
                                             </TableCell>
@@ -317,9 +317,9 @@ function DataTable<T extends TableRowData>({
                     </div>
                     <Pagination
                         currentPage={pageNumber + 1}
-                        totalPages={Math.ceil(tableData.length / rowsPerPage)}
+                        totalPages={Math.ceil(tableData?.length / rowsPerPage)}
                         pageSize={rowsPerPage}
-                        totalItems={tableData.length}
+                        totalItems={tableData?.length}
                         onPageChange={(page) => setPageNumber(page - 1)}
                         handleNext={handleNextPage}
                         setRowsPerPage={setRowsPerPage}

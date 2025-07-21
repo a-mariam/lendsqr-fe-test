@@ -1,11 +1,13 @@
 'use client'
 import React from 'react';
 import TableContainer from "@/components/table/table-container";
-import {mockData} from "@/util/mock-datas/table";
+import {getRandomStatusItem, mockData} from "@/util/mock-datas/table";
 import {MdOutlineRemoveRedEye} from "react-icons/md";
 import {FaUserCheck} from "react-icons/fa";
 import {FaUserXmark} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
+import {useGetAllUsersQuery} from "@/service/auth";
+import dayjs from "dayjs";
 
 
 
@@ -19,6 +21,9 @@ interface viewUser {
     phone: string
     dateJoined:string
     status:number
+    company: {
+        name: string
+    }
 }
 
 type viewAllUsers = viewUser & TableRowData;
@@ -26,18 +31,23 @@ const Table = () => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const router = useRouter();
+    const {data, isLoading} = useGetAllUsersQuery(100)
+    console.log('data: ', data)
 
     const rowClick = (row: string | object | React.ReactNode) => {
         console.log('row: ',row)
         router.push("/users/details");
     }
+    const now = new Date();
+    const formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+
     const tableHeader = [
-        { id: "organization", title: "ORGANIZATION", selector: (row:  viewAllUsers) =>row.organization},
+        { id: "organization", title: "ORGANIZATION", selector: (row:  viewAllUsers) =>row?.company?.name},
         { id: "username", title: "USERNAME",selector: (row:  viewAllUsers) =>row.username },
         { id: "email", title: "EMAIL",selector: (row:  viewAllUsers) =>row.email },
         { id: "phone", title: "PHONE NUMBER",selector: (row:  viewAllUsers) =>row.phone },
-        { id: "dateJoined", title: "DATE JOINED",selector: (row:  viewAllUsers) =>row.dateJoined },
-        { id: "status", title: "STATUS",selector: (row:  viewAllUsers) =>row.status },
+        { id: "dateJoined", title: "DATE JOINED",selector: (row:  viewAllUsers) =><div className={`flex`}>{dayjs(row.dateJoined?.toString()).format('MMM D, YYYY')} {formattedTime}</div> },
+        { id: "status", title: "STATUS",selector: (row:  viewAllUsers) =>getRandomStatusItem() },
     ];
 
     const dropDownOption = [
@@ -49,9 +59,8 @@ const Table = () => {
     return (
         <div className={`w-full h-full pb-3`}>
             <TableContainer
-                //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-expect-error
-                tableData={mockData}
+                isLoading={isLoading}
+                tableData={data?.users}
                 tableHeader={tableHeader}
                 handleRowClick={rowClick}
                 totalPages={100}

@@ -14,9 +14,12 @@ const Topbar = () => {
 
 
     const currentSidebarItemLabel = useAppSelector(state => state.layout.currentTab)
+    const fetchUserData = useAppSelector(state => state.layout.userData)
+
     const openMobileSidebar = () => {
         store.dispatch(setShowMobileSidebar(true))
     }
+
 
     return (
         <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky flex justify-between top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBarMobile} `}>
@@ -62,11 +65,11 @@ const Topbar = () => {
                         <BellIcon data-testid={'notificationIcon'} id={'notificationIcon'} className={` mt-auto mb-auto h-6 w-6 text-[#213F7D]  `}/>
                         <div className={`flex  gap-2`}>
                             <Avatar className={`w-12 h-12`}>
-                                <AvatarImage  src="https://github.com/shadcn.png" />
+                                <AvatarImage  src={fetchUserData?.image} />
                                 <AvatarFallback>CN</AvatarFallback>
                             </Avatar>
                             <div className={`md:flex  lg:flex hidden gap-2 `}>
-                                <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans500.className} text-[16px]  text-[#213F7D] `}>Adedeji</p>
+                                <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans500.className} text-[16px]  text-[#213F7D] `}>{fetchUserData?.firstName}</p>
                                 <MdArrowDropDown className={` text-[#213F7D] h-4 w-4  mt-auto mb-auto`} />
                             </div>
                         </div>
