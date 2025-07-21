@@ -5,21 +5,38 @@ import {mockData} from "@/util/mock-datas/table";
 import {MdOutlineRemoveRedEye} from "react-icons/md";
 import {FaUserCheck} from "react-icons/fa";
 import {FaUserXmark} from "react-icons/fa6";
+import {useRouter} from "next/navigation";
 
+
+
+interface TableRowData {
+    [key: string]: string | number | null | React.ReactNode  ;
+}
+
+interface viewUser {
+    username: string
+    email: string
+    phone: string
+    dateJoined:string
+    status:number
+}
+
+type viewAllUsers = viewUser & TableRowData;
 const Table = () => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    
-    const rowClick = () => {
+    const router = useRouter();
 
+    const rowClick = (row: string | object | React.ReactNode) => {
+        router.push("/users/details");
     }
     const tableHeader = [
-        { id: "organization", title: "ORGANIZATION" },
-        { id: "username", title: "USERNAME" },
-        { id: "email", title: "EMAIL" },
-        { id: "phone", title: "PHONE NUMBER" },
-        { id: "date_joined", title: "DATE JOINED" },
-        { id: "status", title: "STATUS" },
+        { id: "organization", title: "ORGANIZATION", selector: (row:  viewAllUsers) =>row.organization},
+        { id: "username", title: "USERNAME",selector: (row:  viewAllUsers) =>row.username },
+        { id: "email", title: "EMAIL",selector: (row:  viewAllUsers) =>row.email },
+        { id: "phone", title: "PHONE NUMBER",selector: (row:  viewAllUsers) =>row.phone },
+        { id: "dateJoined", title: "DATE JOINED",selector: (row:  viewAllUsers) =>row.dateJoined },
+        { id: "status", title: "STATUS",selector: (row:  viewAllUsers) =>row.status },
     ];
 
     const dropDownOption = [

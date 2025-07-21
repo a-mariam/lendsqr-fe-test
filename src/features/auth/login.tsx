@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
-import {AvenirNext600,AvenirNext700} from "@/app/fonts";
+import {AvenirNext600, AvenirNext700, AvenirNext400, inter} from "@/app/fonts";
 import AuthInputField from "@/components/Input";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
@@ -23,6 +23,7 @@ const Login = () => {
 
     const handleClick = (e?:React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault()
+
         router.push("/users");
     }
     const validateEmail = (input: string) => {
@@ -68,11 +69,11 @@ const Login = () => {
                    />
                </div>
             </div>
-            <div className={` w-[100%] h-full bg-[#ffffff]    grid  md:pl-28 px-6   `}>
+            <div className={` w-[100%] h-full bg-[#ffffff]    grid  md:pl-20 px-6   `}>
                 <div className={`w-[100%] md:place-self-center place-self-center pl-10 lg:pt-10  md:pt-10 h-fit grid gap-14   `}>
                     <div className={` w-fit h-fit  `}>
                         <p id={'welcomeText'} data-testid={'welcomeText'} className={`${AvenirNext700.className} mb-2 leading-tight text-[#213F7D] text-[40px]`}>Welcome!</p>
-                        <p className={`text-[16px]  mr-auto ml-auto text-[#545F7D] `}>Enter details to login.</p>
+                        <p className={`font-light font-stretch-normal text-[20px]  mr-auto ml-auto text-[#545F7D] `}>Enter details to login.</p>
                     </div>
                     <form
                         id={'loginForm'}

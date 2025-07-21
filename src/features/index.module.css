@@ -5,3 +5,16 @@
 .cardDropShadow{
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
+
+.userDetailsHeader{
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+
+}
+.overflowVerticallyWithoutBg{
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
