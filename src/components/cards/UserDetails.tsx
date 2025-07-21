@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import {RobotoMono, workSans, workSans500} from "@/app/fonts";
+import { workSans, workSans500} from "@/app/fonts";
 import styles from '@/features/index.module.css'
 import { UserRound } from 'lucide-react';
 import InfoCard from '@/components/cards/InfoCard'
@@ -35,7 +35,7 @@ const UserDetails = () => {
         {name: 'FULL NAME',  value:'praise james'},
         {name: 'PHONE NUMBER',  value:'0903484848'},
         {name: 'EMAIL ADDRESS',  value:'grace@gmail.com'},
-        {name: 'RELATIONSHIP',  value:'Sister'},,
+        {name: 'RELATIONSHIP',  value:'Sister'},
 
     ]
     const personalInfoTabContent = [
@@ -80,7 +80,7 @@ const UserDetails = () => {
                         </div>
                         <div className={` h-full  grid  border-r border-[#dddfe5] `}>
                             <div className={` self-center px-6  h-fit `}>
-                                <p id={'userTier'} data-testid={'userTier'} className={`${workSans500.className} self-center  text-[#213F7D] text-[14px] `}>User's Tier</p>
+                                <p id={'userTier'} data-testid={'userTier'} className={`${workSans500.className} self-center  text-[#213F7D] text-[14px] `}>User&apos;s Tier</p>
                                 <p id={'userId'} data-testid={'userId'} className={` ${workSans.className} self-center text-[#545F7D] text-[14px]  `}>LSQFf587g90</p>
                             </div>
                         </div>
@@ -94,10 +94,15 @@ const UserDetails = () => {
                 </div>
 
                 <div className={`flex max-w-full  ${styles.overflowVerticallyWithoutBg}  break-keep md:space-x-6 w-full `}>
-                    {detailsTabContent?.map((item, index) => (
+                    {detailsTabContent?.map((item) => (
                         <button
                             onClick={() => {setCurrentDetailTab(item?.name)}}
-                            key={item?.name} className={` ${workSans.className} break-keep  text-[15px] ${currentDetailTab === item?.name ? `text-[#39CDCC] flex justify-center w-full   border-b-2 border-[#39CDCC] ` : `text-black border-none w-full `}  h-fit py-2 `}>{item?.name}</button>
+                            key={item?.name}
+                            className={` ${workSans.className} break-keep  text-[15px] 
+                            ${currentDetailTab === item?.name 
+                                ? `text-[#39CDCC] flex justify-center w-full   border-b-2 border-[#39CDCC] ` 
+                                : `text-black border-none w-full `
+                            }  h-fit py-2 `}>{item?.name}</button>
                     ))}
                 </div>
             </div>

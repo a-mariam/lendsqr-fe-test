@@ -1,8 +1,10 @@
 import {combineReducers} from "@reduxjs/toolkit";
 import layoutReducer from "@/redux/slice/layoutSlice";
+import {authApi} from "@/service/auth";
 
 const appReducer = combineReducers({
     layout:layoutReducer,
+    [authApi.reducerPath]: authApi.reducer,
 })
 
 // const rootReducer = (

@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
-import {AvenirNext600, AvenirNext700, AvenirNext400, inter} from "@/app/fonts";
+import {AvenirNext600, AvenirNext700} from "@/app/fonts";
 import AuthInputField from "@/components/Input";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
@@ -9,8 +9,6 @@ import {useRouter} from "next/navigation";
 const Login = () => {
 
     const router = useRouter();
-    // const [disableButton, setDisableButton] = React.useState(true);
-    // const [ setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
     const [validEmail, setValidEmail] = useState(false)
     const validateEmailInput = (input: string ) => {

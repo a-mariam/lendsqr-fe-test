@@ -13,7 +13,7 @@ export const customFetchBaseQuery = fetchBaseQuery({
     fetchFn: typeof window === 'undefined'
         ? (fetch as unknown as typeof globalThis.fetch)
         : undefined,
-    prepareHeaders:  (headers,{ endpoint }) => {
+    prepareHeaders:  (headers) => {
         const token = sessionStorage.getItem("access_token")
         if (token) {
             headers.set('authorization', `Bearer ${token}`);
