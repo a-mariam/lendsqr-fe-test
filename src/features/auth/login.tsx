@@ -23,7 +23,7 @@ const Login = () => {
 
     const handleClick = async (e?:React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault()
-        const data = {email: validEmail, password: password}
+        // const data = {email: validEmail, password: password}
         const response  =  await loginMutation({username: 'emilys', password: 'emilyspass'})
         console.log('response', response)
         if(response?.data){
