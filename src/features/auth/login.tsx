@@ -12,7 +12,6 @@ const Login = () => {
     const router = useRouter();
     const [password, setPassword] = React.useState<string>('');
     const [validEmail, setValidEmail] = useState(false)
-    const [email, setEmail] = useState('')
     const validateEmailInput = (input: string ) => {
         const validRegex  = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         return !!RegExp(validRegex).exec(input);
@@ -31,7 +30,7 @@ const Login = () => {
             setItemSessionStorage('accessToken',response.data.accessToken)
 
         }
-        // router.push("/users");
+        router.push("/users");
     }
     const validateEmail = (input: string) => {
         const isValid = validateEmailInput(input);
