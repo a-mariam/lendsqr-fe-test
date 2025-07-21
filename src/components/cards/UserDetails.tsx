@@ -7,7 +7,7 @@ import InfoCard from '@/components/cards/InfoCard'
 
 const UserDetails = () => {
 
-    const [currentDetailTab, setCurrentDetailTab] = React.useState('GeneralDetails')
+    const [currentDetailTab, setCurrentDetailTab] = React.useState('General Details')
 
     const detailsTabContent = [
         {name: 'General Details', id: 1, value:'GeneralDetails'},
@@ -101,7 +101,7 @@ const UserDetails = () => {
                     ))}
                 </div>
             </div>
-            {
+            { currentDetailTab === 'General Details' &&
                 <div className={` w-full gap-4  h-full px-4 py-6  grid  ${styles.dropShaw}  bg-white `}>
                     <InfoCard title={'Personal Info'} showBorder={true} infos={personalInfoTabContent}/>
                     <InfoCard title={'Education and Employment'} showBorder={true} infos={educationAndEmployment}/>

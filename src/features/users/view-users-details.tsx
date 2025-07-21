@@ -15,9 +15,9 @@ const ViewUsersDetails = () => {
                    <HiOutlineArrowLongLeft className={` text-[#545F7D] mt-auto mb-auto h-6 w-6 `} />
                    Back to users
                </button>
-               <div className={`  grid gap-2 md:gap-0  md:flex w-full md:justify-between `}>
+               <div className={`  grid gap-2 md:gap-0   md:flex w-full md:justify-between `}>
                    <p className={` ${workSans500.className} text-[#213F7D] text-[20px] `}>User details</p>
-                   <div className={`md:flex grid w-full  gap-4`}>
+                   <div className={`md:flex grid w-full  md:w-fit gap-4`}>
                        <Button id={'blackListUserButton'} data-testid={'blackListUserButton'} className={` ${workSans600.className} bg-white hover:bg-white w-full md:w-fit lg:w-fit  text-[14px] rounded-md  text-[#E4033B] border border-[#E4033B] `}>BLACKLIST USER</Button>
                        <Button id={'activateUserButton'} data-testid={'activateUserButton'} className={` ${workSans600.className} bg-white hover:bg-white w-full md:w-fit lg:w-fit   text-[14px] rounded-md text-[#39CDCC] border border-[#39CDCC] `}>ACTIVATE USER</Button>
                    </div>
