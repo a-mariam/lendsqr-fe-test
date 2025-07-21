@@ -5,24 +5,33 @@ import {AvenirNext600, AvenirNext700} from "@/app/fonts";
 import AuthInputField from "@/components/Input";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
-
+import { useLoginMutation } from '@/service/auth';
+import {setItemSessionStorage} from "@/util/storage";
 const Login = () => {
 
     const router = useRouter();
     const [password, setPassword] = React.useState<string>('');
     const [validEmail, setValidEmail] = useState(false)
+    const [email, setEmail] = useState('')
     const validateEmailInput = (input: string ) => {
         const validRegex  = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         return !!RegExp(validRegex).exec(input);
 
     }
+    const [loginMutation, {isLoading}] = useLoginMutation();
     const [showEmailMessage, setShowEmailMessage] = useState(false)
     const disableButton = !(validEmail && password.trim().length > 0);
 
-    const handleClick = (e?:React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = async (e?:React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault()
+        const data = {email: validEmail, password: password}
+        const response  =  await loginMutation({username: 'emilys', password: 'emilyspass'})
+        console.log('response', response)
+        if(response?.data){
+            setItemSessionStorage('accessToken',response.data.accessToken)
 
-        router.push("/users");
+        }
+        // router.push("/users");
     }
     const validateEmail = (input: string) => {
         const isValid = validateEmailInput(input);
@@ -88,9 +97,15 @@ const Login = () => {
                         <Button
                             id={'loginButton'}
                             data-testid={'loginButton'}
-                            disabled={disableButton}
+                            disabled={disableButton || isLoading}
                             onClick={ (event) => handleClick(event)}
-                            className={` ${disableButton? `bg-[#d0d0d0] hover:bg-[#d0d0d0]` : `bg-[#39CDCC] hover:bg-[#39CDCC]`}  w-[80%] h-fit py-3  text-white`}>LOG IN</Button>
+                            className={` ${disableButton
+                                ? `bg-[#d0d0d0] hover:bg-[#d0d0d0]` 
+                                : `bg-[#39CDCC] hover:bg-[#39CDCC]`}  
+                                w-[80%] h-fit py-3  text-white`}>
+                            {isLoading ? <p className={` w-4 h-4 border-2 rounded-full  border-white  animate-spin `}></p> : ''}
+                          LOG IN
+                        </Button>
                     </form>
                 </div>
             </div>
