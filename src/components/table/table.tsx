@@ -28,6 +28,7 @@ const Table = () => {
     const router = useRouter();
 
     const rowClick = (row: string | object | React.ReactNode) => {
+        console.log('row: ',row)
         router.push("/users/details");
     }
     const tableHeader = [

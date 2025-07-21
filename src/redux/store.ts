@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import appReducer from "@/redux/reducer";
-import {  persistReducer } from 'redux-persist';
+import {persistReducer, persistStore} from 'redux-persist';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import storage from 'redux-persist/lib/storage/session';
+import { authApi } from '@/service/auth';
+import {setupListeners} from "@reduxjs/toolkit/query";
 
 const persistConfig = {
     key: 'root',
@@ -15,10 +17,17 @@ const persistedReducer = persistReducer(persistConfig, appReducer);
 
 export const store = configureStore({
     reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+    }).concat([
+        authApi.middleware,
+    ]),
 
 })
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);
+setupListeners(store.dispatch);
 
 
 export type AppStore = typeof store;
