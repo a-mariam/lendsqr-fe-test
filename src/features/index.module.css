@@ -22,9 +22,23 @@
     scrollbar-width: none;
 }
 .overflowVertically{
-    width: 100%;
     display: flex;
     overflow: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+.cardStyles {
+    width: 250px;
+    height: 170px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+
+}
+
+@media (max-width: 900px) {
+    .cardStyles {
+        width: 240px;
+        height:160px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    }
 }

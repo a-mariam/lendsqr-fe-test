@@ -23,7 +23,7 @@ const Topbar = () => {
         <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky flex justify-between top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBarMobile} `}>
             <div className={`w-fit   lg:flex lg:justify-between  md:flex md:justify-between  md:pl-6 lg:pl-6  h-fit self-center flex justify-between `}>
                 <div className={`md:hidden lg:hidden flex gap-3 `}>
-                    <IoMdMenu className={`md:hidden lg:hidden flex mt-auto mb-auto`} color='#213F7D' style={{ height: '1.5rem', width: '1.5rem' }}
+                    <IoMdMenu id={'menuBar'} data-testid={'menuBar'} className={`md:hidden lg:hidden flex mt-auto mb-auto`} color='#213F7D' style={{ height: '1.5rem', width: '1.5rem' }}
                               onClick={openMobileSidebar}
                     />
                     <p className={`md:hidden lg:hidden flex text-[20px] text-[#213F7D]  mt-auto mb-auto `}>{currentSidebarItemLabel}</p>

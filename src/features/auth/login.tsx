@@ -26,14 +26,21 @@ const Login = () => {
 
 
     useEffect(() => {
+        const handleOnline = () => setError('');
+        const handleOffline = () => setError('No internet connection');
+
+        window.addEventListener('online', handleOnline);
+        window.addEventListener('offline', handleOffline);
+
         if (!navigator.onLine) {
             setError('No internet connection');
-
-        }else{
-            setError('');
-
         }
-        },[navigator])
+
+        return () => {
+            window.removeEventListener('online', handleOnline);
+            window.removeEventListener('offline', handleOffline);
+        };
+    }, []);
 
     const handleClick = async (e?:React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault()
