@@ -257,7 +257,7 @@ function DataTable<T extends TableRowData>({
                         />
                     </div>
                     <div className={`md:hidden lg:hidden`}>
-                    <div className={`md:hidden ${styles.dropShaw} rounded-md`} id="datatable-mobile" data-testid="datatable-mobile">
+                    <div className={`md:hidden ${styles.mobileTable} rounded-md`} id="datatable-mobile" data-testid="datatable-mobile">
                         <div style={{ height: `${tableHeight}vh`, overflow: "auto" }}>
                             <Table>
                                 <TableHeader className="sticky top-0 bg-white">
