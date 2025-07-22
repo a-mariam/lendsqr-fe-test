@@ -60,7 +60,7 @@ function getRandomItem<T>(arr: T[]): T {
 }
 
 export function getRandomStatusItem(row?: viewAllUsers)  {
-    console.log('row', row);
+    sessionStorage.setItem('row', JSON.stringify(row));
     return statuses[Math.floor(Math.random() * statuses.length)];
 }
 
