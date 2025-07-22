@@ -14,7 +14,7 @@ export const customFetchBaseQuery = fetchBaseQuery({
         ? (fetch as unknown as typeof globalThis.fetch)
         : undefined,
     prepareHeaders:  (headers) => {
-        const token = sessionStorage.getItem("access_token")
+        const token = sessionStorage.getItem("accessToken")
         if (token) {
             headers.set('authorization', `Bearer ${token}`);
             headers.set('Content-Type', 'application/json');

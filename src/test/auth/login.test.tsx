@@ -3,6 +3,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Login from '@/features/auth/login';
 import '@testing-library/jest-dom';
+import {Providers} from "@/app/Provider";
 
 jest.mock('next/navigation', () => ({
     useRouter: () => ({
@@ -11,21 +12,26 @@ jest.mock('next/navigation', () => ({
 }));
 
 describe('Login Component', () => {
+    beforeEach(() => {
+        render(
+          <Providers>
+              <Login />
+          </Providers>
+        );
+
+    })
     test('renders welcome text and form', () => {
-        render(<Login />);
         expect(screen.getByTestId('welcomeText')).toBeInTheDocument();
         expect(screen.getByTestId('loginForm')).toBeInTheDocument();
         expect(screen.getByTestId('loginButton')).toBeInTheDocument();
     });
 
     test('login button is disabled initially', () => {
-        render(<Login />);
         const button = screen.getByTestId('loginButton');
         expect(button).toBeDisabled();
     });
 
     test('shows email validation message on invalid email', () => {
-        render(<Login />);
         const emailInput = screen.getByTestId('userEmailInput');
         fireEvent.change(emailInput, { target: { value: 'invalidemail' } });
 
@@ -33,7 +39,6 @@ describe('Login Component', () => {
     });
 
     test('enables login button when email and password are valid', () => {
-        render(<Login />);
         const emailInput = screen.getByTestId('userEmailInput');
         const passwordInput = screen.getByTestId('userPasswordInput');
 
@@ -52,7 +57,6 @@ describe('Login Component', () => {
             }),
         }));
 
-        render(<Login />);
         const emailInput = screen.getByTestId('userEmailInput');
         const passwordInput = screen.getByTestId('userPasswordInput');
         const button = screen.getByTestId('loginButton');

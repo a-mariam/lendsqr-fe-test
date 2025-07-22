@@ -40,6 +40,8 @@
 //         status: "Active",
 //     },
 // ];
+import {viewAllUsers} from "@/components/table/table";
+
 export interface UserRow {
     organization: string;
     username: string;
@@ -55,6 +57,11 @@ const statuses: UserRow["status"][] = ["Active", "Inactive", "Pending", "Blackli
 
 function getRandomItem<T>(arr: T[]): T {
     return arr[Math.floor(Math.random() * arr.length)];
+}
+
+export function getRandomStatusItem(row?: viewAllUsers)  {
+    console.log('row', row);
+    return statuses[Math.floor(Math.random() * statuses.length)];
 }
 
 function generatePhone(index: number): string {

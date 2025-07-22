@@ -8,15 +8,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MdArrowDropDown } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import styles from './index.module.css'
-import {setShowMobileSidebar} from "@/redux/slice/layoutSlice";
+import {setShowMobileSidebar, setSearchTerm} from "@/redux/slice/layoutSlice";
 import {store, useAppSelector} from '@/redux/store';
 const Topbar = () => {
-
-
     const currentSidebarItemLabel = useAppSelector(state => state.layout.currentTab)
+    const fetchUserData = useAppSelector(state => state.layout.userData)
+
     const openMobileSidebar = () => {
         store.dispatch(setShowMobileSidebar(true))
     }
+
 
     return (
         <div className={` w-screen bg-white px-3 md:px-0 lg:px-0 sticky flex justify-between top-0 h-[10vh] md:h-[13vh] lg:h-[13vh] ${styles.topBarMobile} `}>
@@ -41,11 +42,12 @@ const Topbar = () => {
                 </div>
             </div>
             <div className={`md:w-[80vw] ${styles.topBar}  lg:w-[80vw]  md:px-8 md:flex md:justify-between md:items-center  order-last   `}>
-                <div className=" w-[39%] sm:hidden md:mt-auto md:mb-auto   md:flex lg:flex hidden  ">
+                <div className=" w-[39%] sm:hidden md:mt-auto md:mb-auto focus:border-none    md:flex lg:flex hidden  ">
                     <div className="relative w-full justify-end ">
                         <Input
                             id={'searchInput'}
                             data-testid={`searchInput`}
+                            onChange={(e) => {store.dispatch(setSearchTerm(e.target.value))}}
                             type="text"
                             placeholder="Search for anything"
                             className={` ${inter.className}  placeholder:text-[14px] placeholder:text-[#cdd1da]  text-[15px] text-[#cdd1da] w-full pl-4 pr-12 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#39CDCC] focus:border-transparent`}
@@ -62,11 +64,11 @@ const Topbar = () => {
                         <BellIcon data-testid={'notificationIcon'} id={'notificationIcon'} className={` mt-auto mb-auto h-6 w-6 text-[#213F7D]  `}/>
                         <div className={`flex  gap-2`}>
                             <Avatar className={`w-12 h-12`}>
-                                <AvatarImage  src="https://github.com/shadcn.png" />
+                                <AvatarImage  src={fetchUserData?.image ? fetchUserData?.image : ''} />
                                 <AvatarFallback>CN</AvatarFallback>
                             </Avatar>
                             <div className={`md:flex  lg:flex hidden gap-2 `}>
-                                <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans500.className} text-[16px]  text-[#213F7D] `}>Adedeji</p>
+                                <p id={'userName'} data-testid={'userName'} className={`mt-auto mb-auto ${workSans500.className} text-[16px]  text-[#213F7D] `}>{fetchUserData?.firstName}</p>
                                 <MdArrowDropDown className={` text-[#213F7D] h-4 w-4  mt-auto mb-auto`} />
                             </div>
                         </div>
