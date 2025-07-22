@@ -1,10 +1,11 @@
 
 import '@testing-library/react'
-import { render, screen } from '@testing-library/react';
+import { render, screen ,fireEvent} from '@testing-library/react';
 import Topbar from '@/features/layout/topbar';
 import '@testing-library/jest-dom';
 import {Providers} from "@/app/Provider";
 import React from "react";
+import { store } from '@/redux/store';
 
 describe('Topbar component', () => {
     beforeEach(() => {
@@ -36,4 +37,10 @@ describe('Topbar component', () => {
     //     expect(userName).toBeInTheDocument();
     //     expect(userName).toHaveTextContent('Adedeji');
     // });
+    it('dispatches setShowMobileSidebar when menu icon is clicked', () => {
+        // const menuButton = screen.getByRole('button', { hidden: true });
+        const menuButton = screen.getByTestId('menuBar')
+        fireEvent.click(menuButton);
+        expect(store.getState().layout.showMobileSidebar).toBe(true);
+    });
 });
