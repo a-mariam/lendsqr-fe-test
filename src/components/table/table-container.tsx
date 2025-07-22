@@ -160,7 +160,7 @@ function DataTable<T extends TableRowData>({
                 <TableSkeleton />
             ) : tableData?.length === 0 ? (
                 searchEmptyState ? (
-                    <TableEmptyState icon={<MagnifyingGlassIcon />} name={sideBarTabName} className={emptyStateStyle} optionalFilterName={optionalFilterName} condition={condition} isSearch />
+                    <TableEmptyState icon={<MagnifyingGlassIcon />} name={sideBarTabName} className={emptyStateStyle} optionalFilterName={optionalFilterName} condition={condition} isSearch={true} />
                 ) : (
                     <TableEmptyState icon={icon} name={sideBarTabName} className={emptyStateStyle} optionalFilterName={optionalFilterName} condition={condition} />
                 )

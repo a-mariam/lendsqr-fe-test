@@ -4,7 +4,6 @@ import Table from "@/components/table/table";
 import {workSans500} from "@/app/fonts";
 import Card, {CardProps} from "@/components/cards/card";
 import styles from "@/features/index.module.css"
-import { useGetAllUsersQuery } from '@/service/auth';
 
 const ViewAllUser = () => {
 
@@ -21,11 +20,11 @@ const ViewAllUser = () => {
             <p id={'usersText'}
                data-testid={'usersText'}
                className={`${workSans500.className} hidden pt-6 pb-4   md:flex lg:flex text-[24px] text-[#213F7D]`}>Users</p>
-            <div className={` ${styles.overflowVerticallyWithoutBg}  flex w-full gap-8 md:gap-4 mb-6   `}>
+            <div className={` ${styles.overflowVertically}  bg-[#fbfbfb] h-fit py-4 px-4  md:py-4 md:px-4  flex w-full gap-8 md:gap-4 mb-6   `}>
                 {cardItems?.map((item: CardProps) => (
-                    <div key={item.id} className={`w-full md:py-0 py-6  h-full `}>
-                        <Card imageBackgroundColor={item.imageBackgroundColor} name={item.name} id={item.id} itemAmount={item?.itemAmount} imageUrl={item?.imageUrl} />
-                    </div>
+                    // <div key={item.id} className={`w-full md:py-0 py-6  h-full `}>
+                        <Card key={item.id}  imageBackgroundColor={item.imageBackgroundColor} name={item.name} id={item.id} itemAmount={item?.itemAmount} imageUrl={item?.imageUrl} />
+                    // </div>
                 ))}
             </div>
             <Table/>

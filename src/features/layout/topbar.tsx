@@ -8,11 +8,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MdArrowDropDown } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import styles from './index.module.css'
-import {setShowMobileSidebar} from "@/redux/slice/layoutSlice";
+import {setShowMobileSidebar, setSearchTerm} from "@/redux/slice/layoutSlice";
 import {store, useAppSelector} from '@/redux/store';
 const Topbar = () => {
-
-
     const currentSidebarItemLabel = useAppSelector(state => state.layout.currentTab)
     const fetchUserData = useAppSelector(state => state.layout.userData)
 
@@ -44,11 +42,12 @@ const Topbar = () => {
                 </div>
             </div>
             <div className={`md:w-[80vw] ${styles.topBar}  lg:w-[80vw]  md:px-8 md:flex md:justify-between md:items-center  order-last   `}>
-                <div className=" w-[39%] sm:hidden md:mt-auto md:mb-auto   md:flex lg:flex hidden  ">
+                <div className=" w-[39%] sm:hidden md:mt-auto md:mb-auto focus:border-none    md:flex lg:flex hidden  ">
                     <div className="relative w-full justify-end ">
                         <Input
                             id={'searchInput'}
                             data-testid={`searchInput`}
+                            onChange={(e) => {store.dispatch(setSearchTerm(e.target.value))}}
                             type="text"
                             placeholder="Search for anything"
                             className={` ${inter.className}  placeholder:text-[14px] placeholder:text-[#cdd1da]  text-[15px] text-[#cdd1da] w-full pl-4 pr-12 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#39CDCC] focus:border-transparent`}
@@ -65,7 +64,7 @@ const Topbar = () => {
                         <BellIcon data-testid={'notificationIcon'} id={'notificationIcon'} className={` mt-auto mb-auto h-6 w-6 text-[#213F7D]  `}/>
                         <div className={`flex  gap-2`}>
                             <Avatar className={`w-12 h-12`}>
-                                <AvatarImage  src={fetchUserData?.image} />
+                                <AvatarImage  src={fetchUserData?.image ? fetchUserData?.image : ''} />
                                 <AvatarFallback>CN</AvatarFallback>
                             </Avatar>
                             <div className={`md:flex  lg:flex hidden gap-2 `}>

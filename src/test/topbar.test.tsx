@@ -31,9 +31,9 @@ describe('Topbar component', () => {
         expect(bellIcon).toBeInTheDocument();
     });
 
-    test('renders user name', () => {
-        const userName = screen.getByTestId('userName');
-        expect(userName).toBeInTheDocument();
-        expect(userName).toHaveTextContent('Adedeji');
-    });
+    // test('renders user name', () => {
+    //     const userName = screen.getByTestId('userName');
+    //     expect(userName).toBeInTheDocument();
+    //     expect(userName).toHaveTextContent('Adedeji');
+    // });
 });

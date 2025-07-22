@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import {AvenirNext600, AvenirNext700} from "@/app/fonts";
 import AuthInputField from "@/components/Input";
@@ -21,27 +21,39 @@ const Login = () => {
     }
     const [loginMutation, {isLoading}] = useLoginMutation();
     const [showEmailMessage, setShowEmailMessage] = useState(false)
-    const disableButton = !(validEmail && password.trim().length > 0);
+    const disableButton = !(validEmail && password.trim().length >= 4 );
+    const [error, setError] = React.useState<string>('');
+
+
+    useEffect(() => {
+        if (!navigator.onLine) {
+            setError('No internet connection');
+
+        }else{
+            setError('');
+
+        }
+        },[navigator])
 
     const handleClick = async (e?:React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault()
-        const response  =  await loginMutation({username: 'emilys', password: 'emilyspass'})
-        console.log('response', response)
-        if(response?.data){
-            setItemSessionStorage('accessToken',response?.data?.accessToken)
-            const userData : UserDataType  = {
-                userEmail: response?.data?.email,
-                userID: response?.data?.id,
-                useName: response?.data?.username,
-                firstName: response?.data?.firstName,
-                lastName: response?.data?.lastName,
-                image:response?.data?.image,
-                gender: response?.data?.gender,
-            }
-            store.dispatch(setUserData(userData))
-            router.push("/users");
 
-        }
+            const response = await loginMutation({username: 'emilys', password: 'emilyspass'})
+            if (response?.data) {
+                setItemSessionStorage('accessToken', response?.data?.accessToken)
+                const userData: UserDataType = {
+                    userEmail: response?.data?.email,
+                    userID: response?.data?.id,
+                    useName: response?.data?.username,
+                    firstName: response?.data?.firstName,
+                    lastName: response?.data?.lastName,
+                    image: response?.data?.image,
+                    gender: response?.data?.gender,
+                }
+                store.dispatch(setUserData(userData))
+                router.push("/users");
+            }
+
     }
     const validateEmail = (input: string) => {
         const isValid = validateEmailInput(input);
@@ -116,6 +128,7 @@ const Login = () => {
                             {isLoading ? <p className={` w-4 h-4 border-2 rounded-full  border-white  animate-spin `}></p> : ''}
                           LOG IN
                         </Button>
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
                     </form>
                 </div>
             </div>

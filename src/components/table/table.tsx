@@ -8,11 +8,13 @@ import {FaUserXmark} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
 import {useGetAllUsersQuery} from "@/service/auth";
 import dayjs from "dayjs";
+import {useAppSelector} from "@/redux/store";
+import { LuUserSearch } from "react-icons/lu";
 
 
 
 interface TableRowData {
-    [key: string]: string | number | null | React.ReactNode  ;
+    [key: string]: string | number | null | React.ReactNode |object ;
 }
 
 interface viewUser {
@@ -31,7 +33,9 @@ const Table = () => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const router = useRouter();
-    const {data, isLoading} = useGetAllUsersQuery(100)
+    const searchTerm = useAppSelector(state => state.layout.searchTerm)
+
+    const {data, isLoading, isFetching} = useGetAllUsersQuery({limit:100, search: searchTerm})
     console.log('data: ', data)
 
     const rowClick = (row: string | object | React.ReactNode) => {
@@ -56,11 +60,21 @@ const Table = () => {
         {name: 'Activate User', id: '3', icon: <FaUserXmark />},
     ];
 
+    const handleDropDownClick =  (id: string, row: TableRowData) => {
+        console.log('id: ',id)
+        if (id == '1'){
+            console.log('row: ',row)
+            router.push("/users/details");
+        }
+    }
+
+
+
     return (
         <div className={`w-full h-full pb-3`}>
             <TableContainer
-                isLoading={isLoading}
-                tableData={data?.users}
+                isLoading={isLoading || isFetching }
+                tableData={data ? data?.users : []}
                 tableHeader={tableHeader}
                 handleRowClick={rowClick}
                 totalPages={100}
@@ -68,11 +82,13 @@ const Table = () => {
                 staticHeader='Organization'
                 staticColunm='organization'
                 hasNextPage={true}
+                icon={<LuUserSearch className={` w-6 h-6 `} />}
                 setPageNumber={setPageNumber}
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}
                 showKirkBabel={true}
                 kirkBabDropdownOption={dropDownOption}
+                handleDropDownClick={handleDropDownClick}
             />
         </div>
     );

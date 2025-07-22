@@ -15,8 +15,8 @@ export const authApi = createApi({
             }),
         }),
         getAllUsers: builder.query({
-            query: (limit: number | string) => ({
-                url:`/users?limit=${limit}`,
+            query: (data:{limit: number | string, search ? : string }) => ({
+                url:`/users${data.search ? `/search?q=${data.search}` : ''}?limit=${data.limit} `,
                 method:'GET'
             })
         })

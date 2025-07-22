@@ -14,6 +14,7 @@ interface LayoutState {
     currentTab: string;
     showMobileSidebar: boolean;
     userData: UserDataType;
+    searchTerm: string;
 
 }
 
@@ -28,7 +29,8 @@ const initialState: LayoutState = {
         lastName: '',
         image:'',
         gender: '',
-    }
+    },
+    searchTerm: '',
 }
 
 export const layoutSlice = createSlice({
@@ -43,11 +45,14 @@ export const layoutSlice = createSlice({
         },
         setUserData: (state, action:PayloadAction<UserDataType>) => {
             state.userData = action.payload;
+        },
+        setSearchTerm: (state, action:PayloadAction<string>) => {
+            state.searchTerm = action.payload;
         }
     }
 })
 
-export const {setCurrentTab, setShowMobileSidebar, setUserData} = layoutSlice.actions;
+export const {setCurrentTab, setShowMobileSidebar, setUserData,setSearchTerm} = layoutSlice.actions;
 export default layoutSlice.reducer;
 
 
