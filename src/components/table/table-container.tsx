@@ -92,9 +92,9 @@ function DataTable<T extends TableRowData>({
                                                sideBarTabName,
                                                emptyStateStyle,
                                                icon,
-                                               optionalFilterName,
+                                               // optionalFilterName,
                                                tableCellStyle,
-                                               condition,
+                                               // condition,
                                                isLoading,
                                                totalPages,
                                                pageNumber,
@@ -187,7 +187,7 @@ function DataTable<T extends TableRowData>({
                                         <TableRow key={rowIndex}  className={sx}>
                                             {tableHeader.map((column) => (
                                                 <TableCell
-                                                    onClick={() => handleRowClick(row?.id)}
+                                                    onClick={() => handleRowClick(String(row?.id))}
                                                     id={column.title?.toString()} data-testid={column.title?.toString()}
                                                     key={`${column.id}${rowIndex}`}  className={`h-1 ${isLastPage ? "border-b" : ""} ${tableCellStyle} overflow-hidden whitespace-nowrap text-ellipsis max-w-[80px]`}>
                                                     <div className={`${styles.tableBodyItem} ${tableStyle} h-fit py-3  text-[#545F7D]  text-[14px]  ${workSans.className}  truncate`}>
@@ -226,7 +226,7 @@ function DataTable<T extends TableRowData>({
                                                                                 }`}
                                                                                 onClick={() =>
                                                                                     handleDropDownClick &&
-                                                                                    handleDropDownClick(option.id, row?.id)
+                                                                                    handleDropDownClick(option.id, String(row?.id))
                                                                                 }
                                                                             >
                                                                                 {option?.icon}
@@ -295,22 +295,25 @@ function DataTable<T extends TableRowData>({
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {paginatedData?.map((row, rowIndex) => (
-                                        <TableRow key={rowIndex} className={`h-fit py-3  text-[#545F7D] py-4 h-fit  text-[14px]  ${workSans.className}`} onClick={() => handleRowClick(row?.id)}>
-                                            <TableCell className="truncate px-4 py-2">
-                                                {renderCellContent(
-                                                    tableHeader.find((h) => h.id === staticColunm)!,
-                                                    row
-                                                )}
-                                            </TableCell>
-                                            <TableCell className="truncate px-4 py-4">
-                                                {renderCellContent(
-                                                    tableHeader?.find((h) => h.id === selectedColumn)!,
-                                                    row
-                                                )}
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
+                                    {paginatedData?.map((row, rowIndex) => {
+                                        const staticColumnDef = tableHeader.find((h) => h.id === staticColunm);
+                                        const selectedColumnDef = tableHeader.find((h) => h.id === selectedColumn);
+
+                                        return (
+                                            <TableRow
+                                                key={rowIndex}
+                                                className={`h-fit py-3 text-[#545F7D] text-[14px] ${workSans.className}`}
+                                                onClick={() => handleRowClick(String(row?.id))}
+                                            >
+                                                <TableCell className="truncate px-4 py-2">
+                                                    {staticColumnDef ? renderCellContent(staticColumnDef, row) : null}
+                                                </TableCell>
+                                                <TableCell className="truncate px-4 py-4">
+                                                    {selectedColumnDef ? renderCellContent(selectedColumnDef, row) : null}
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
                                 </TableBody>
                             </Table>
                         </div>

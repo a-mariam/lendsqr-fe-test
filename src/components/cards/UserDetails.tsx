@@ -3,10 +3,9 @@ import React from 'react';
 import { workSans, workSans500} from "@/app/fonts";
 import styles from '@/features/index.module.css'
 import { UserRound } from 'lucide-react';
-import InfoCard from '@/components/cards/InfoCard'
 import {useAppSelector} from "@/redux/store";
 import {useGetUserQuery} from "@/service/auth";
-import Image from 'next/image';
+import InfoCard from "@/components/cards/InfoCard";
 
 const UserDetails = () => {
 
@@ -46,7 +45,7 @@ const UserDetails = () => {
     const personalInfoTabContent = [
         {name: 'FULL NAME',  value:`${data?.firstName}` + ' '+`${data?.lastName}`},
         {name: 'PHONE NUMBER',  value:`${data?.phone ? data?.phone : ''}`},
-        {name: 'EMAIL ADDRESS',  value:`${data?.email ? data?.email : ''}`},
+        {name: 'EMAIL ADDRESS',  value:`${data?.email ? data?.email?.replace('dummyjson', "") : ''}`},
         {name: 'BVN',  value:'0129292929'},
         {name: 'GENDER',  value:`${data?.gender}`},
         {name: 'MARITAL STATUS',  value:`${data?.status ? data?.status : 'single'}`},
@@ -58,7 +57,7 @@ const UserDetails = () => {
         {name: 'EMPLOYMENT STATUS',  value:'Employed'},
         {name: 'SECTOR OF EMPLOYMENT',  value:`${data?.company?.department ? data?.company?.department : ''}`},
         {name: 'DURATION OF EMPLOYMENT',  value:'2 years'},
-        {name: 'OFFICIAL EMAIL',  value:`${data?.email ? data?.email : ''}`},
+        {name: 'OFFICIAL EMAIL',  value:`${data?.email ? data?.email?.replace('dummyjson', "") : ''}`},
         {name: 'MONTHLY INCOME',  value:'₦20,000- ₦40,000'},
         {name: 'LOAN REPAYMENT',  value:'40,000'},
     ]
@@ -113,11 +112,11 @@ const UserDetails = () => {
             </div>
             { currentDetailTab === 'General Details' &&
                 <div className={` w-full gap-4  h-full px-4 py-6  grid  ${styles.dropShaw}  bg-white `}>
-                    <InfoCard title={'Personal Info'} showBorder={true} infos={personalInfoTabContent}/>
-                    <InfoCard title={'Education and Employment'} showBorder={true} infos={educationAndEmployment}/>
-                    <InfoCard title={'Socials'} showBorder={true} infos={socials}/>
-                    <InfoCard title={'Guarantors'} showBorder={true} infos={Guarantor}/>
-                    <InfoCard title={''} showBorder={false} infos={Guarantor2}/>
+                    <InfoCard infos={personalInfoTabContent} showBorder={true} title={'Personal Info'} />
+                        <InfoCard title={'Education and Employment'} showBorder={true} infos={educationAndEmployment}/>
+                        <InfoCard title={'Socials'} showBorder={true} infos={socials}/>
+                        <InfoCard title={'Guarantors'} showBorder={true} infos={Guarantor}/>
+                        <InfoCard title={''} showBorder={false} infos={Guarantor2}/>
                 </div>
             }
         </div>

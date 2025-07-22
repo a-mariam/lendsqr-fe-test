@@ -9,7 +9,7 @@ export interface CardProps {
     id: string;
     imageUrl: string;
     imageBackgroundColor: string;
-    itemAmount: number;
+    itemAmount: string ;
 }
 
 const Card = ({name, id, imageUrl,imageBackgroundColor,itemAmount}:CardProps) => {
@@ -17,7 +17,7 @@ const Card = ({name, id, imageUrl,imageBackgroundColor,itemAmount}:CardProps) =>
         <div
             id={id}
             data-testid={id}
-            className={`${styles.headerCardDropShadow} grid gap-2   py-4 px-3  w-[40rem] h-[13rem] md:h-[17rem] md:w-[10rem] lg:w-full lg:h-fit `}
+            className={`${styles.headerCardDropShadow} grid gap-2   py-4 px-3  w-fit  pl-4 md:pl-0 pr-40 md:pr-0 h-[12rem] md:h-[17rem] md:w-[10rem] lg:w-full lg:h-fit `}
         >
             <div
                 style={{backgroundColor: imageBackgroundColor}}
@@ -29,8 +29,8 @@ const Card = ({name, id, imageUrl,imageBackgroundColor,itemAmount}:CardProps) =>
                     height={20}
                 />
             </div>
-            <p className={` ${workSans500.className} flex  text-[#545F7D]  text-[14px] `}>{name}</p>
-            <p className={`${workSans600.className} text-[24px] flex   text-[#213F7D] `}>{formateDigits(itemAmount)}</p>
+            <span className={` ${workSans500.className} flex  break-keep w-full  text-[#545F7D]  text-[14px] `}>{name}</span>
+            <p className={`${workSans600.className} text-[24px] flex   text-[#213F7D] `}>{formateDigits(Number(itemAmount))}</p>
 
         </div>
     );

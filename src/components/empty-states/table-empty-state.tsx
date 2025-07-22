@@ -26,7 +26,8 @@ function TableEmptyState({name, icon: Icon, className, isSearch, descriptionId}:
                         <div
                             id="emptyStateIconId"
                             data-testid="icon-container"
-                            className="bg-[#39CDCC] w-24 h-24 flex justify-center items-center rounded-full mb-5"
+                            style={{backgroundColor: '#cbfcfc'}}
+                            className=" w-24 h-24 flex justify-center items-center rounded-full mb-5"
                         >
                             {typeof Icon === 'function' ? (
                                 <Icon style={{ fontSize: '2.5rem', color: '#142854' }} />
@@ -47,7 +48,7 @@ function TableEmptyState({name, icon: Icon, className, isSearch, descriptionId}:
                         <span id={ descriptionId ? descriptionId :`loanEmptyStateTitle`} data-testid={descriptionId ? descriptionId :'loanEmptyStateTitle'} className={` ${cabinetGroteskRegular.className} mr-auto ml-auto  text-black500 `}>{""}</span>
                         <h1 id="titleId" className="font-normal mb-2">
                             <span className="normal-case">{name ? name.charAt(0).toUpperCase() + name.slice(1) + 's' : ''}</span>{' '}
-                            Not users found
+                            Users not found
                         </h1>
 
                     </div>
