@@ -10,9 +10,9 @@ import {useGetUserQuery} from "@/service/auth";
 
 const ViewUsersDetails = () => {
     const router = useRouter();
-    const searchTerm = useAppSelector(state => state.layout.searchTerm)
+    const selectedUserId = useAppSelector(state => state.layout.selectedUserId)
 
-    const {data, isLoading, isFetching} = useGetUserQuery({})
+    const {isLoading, isFetching} = useGetUserQuery(selectedUserId)
     const onCLickBack = () => {
         router.push("/users");
     }
@@ -38,7 +38,15 @@ const ViewUsersDetails = () => {
                    </div>
                </div>
                <div>
-                   <UserDetails/>
+                   {isFetching || isLoading ? (
+                       <div className={` w-full h-[30vh]    bg-[#E7EAED]  animate-pulse `}>
+                       </div>
+                   )
+                       :
+                       (
+                       <UserDetails/>
+                       )
+                   }
                </div>
            </div>
 

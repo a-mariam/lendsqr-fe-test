@@ -8,8 +8,9 @@ import {FaUserXmark} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
 import {useGetAllUsersQuery} from "@/service/auth";
 import dayjs from "dayjs";
-import {useAppSelector} from "@/redux/store";
+import {store, useAppSelector} from "@/redux/store";
 import { LuUserSearch } from "react-icons/lu";
+import {setSelectedUserId} from "@/redux/slice/layoutSlice";
 
 
 
@@ -36,10 +37,9 @@ const Table = () => {
     const searchTerm = useAppSelector(state => state.layout.searchTerm)
 
     const {data, isLoading, isFetching} = useGetAllUsersQuery({limit:100, search: searchTerm})
-    console.log('data: ', data)
 
-    const rowClick = (row: string | object | React.ReactNode) => {
-        console.log('row: ',row)
+    const rowClick = (id: string) => {
+        store.dispatch(setSelectedUserId(id))
         router.push("/users/details");
     }
     const now = new Date();
@@ -60,10 +60,9 @@ const Table = () => {
         {name: 'Activate User', id: '3', icon: <FaUserXmark />},
     ];
 
-    const handleDropDownClick =  (id: string, row: TableRowData) => {
-        console.log('id: ',id)
+    const handleDropDownClick =  (id: string,  rowID: string) => {
+        store.dispatch(setSelectedUserId(rowID))
         if (id == '1'){
-            console.log('row: ',row)
             router.push("/users/details");
         }
     }

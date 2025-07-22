@@ -15,6 +15,7 @@ interface LayoutState {
     showMobileSidebar: boolean;
     userData: UserDataType;
     searchTerm: string;
+    selectedUserId: string;
 
 }
 
@@ -31,6 +32,7 @@ const initialState: LayoutState = {
         gender: '',
     },
     searchTerm: '',
+    selectedUserId: '',
 }
 
 export const layoutSlice = createSlice({
@@ -48,11 +50,14 @@ export const layoutSlice = createSlice({
         },
         setSearchTerm: (state, action:PayloadAction<string>) => {
             state.searchTerm = action.payload;
+        },
+        setSelectedUserId: (state, action:PayloadAction<string>) => {
+            state.selectedUserId = action.payload;
         }
     }
 })
 
-export const {setCurrentTab, setShowMobileSidebar, setUserData,setSearchTerm} = layoutSlice.actions;
+export const {setCurrentTab, setShowMobileSidebar, setSelectedUserId,setUserData,setSearchTerm} = layoutSlice.actions;
 export default layoutSlice.reducer;
 
 

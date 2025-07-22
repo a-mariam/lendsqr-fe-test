@@ -4,11 +4,16 @@ import { workSans, workSans500} from "@/app/fonts";
 import styles from '@/features/index.module.css'
 import { UserRound } from 'lucide-react';
 import InfoCard from '@/components/cards/InfoCard'
+import {useAppSelector} from "@/redux/store";
+import {useGetUserQuery} from "@/service/auth";
+import Image from 'next/image';
 
 const UserDetails = () => {
 
     const [currentDetailTab, setCurrentDetailTab] = React.useState('General Details')
+    const selectedUserId = useAppSelector(state => state.layout.selectedUserId)
 
+    const {data} = useGetUserQuery(selectedUserId)
     const detailsTabContent = [
         {name: 'General Details', id: 1, value:'GeneralDetails'},
         {name: 'Documents', id: 2,value:'Documents'},
@@ -19,9 +24,9 @@ const UserDetails = () => {
 
     ]
     const socials = [
-        {name: 'TWITTER',  value:'@grace_effiom'},
-        {name: 'FACEBOOK',  value:'Grace jack'},
-        {name: 'INSTAGRAM',  value:'grace@gmail.com'},
+        {name: 'TWITTER',  value:'@grey_man'},
+        {name: 'FACEBOOK',  value:'grey'},
+        {name: 'INSTAGRAM',  value:'grey_man'},
 
     ]
     const Guarantor = [
@@ -39,22 +44,22 @@ const UserDetails = () => {
 
     ]
     const personalInfoTabContent = [
-        {name: 'FULL NAME',  value:'Grace Effiom'},
-        {name: 'PHONE NUMBER',  value:'0903484848'},
-        {name: 'EMAIL ADDRESS',  value:'grace@gmail.com'},
+        {name: 'FULL NAME',  value:`${data?.firstName}` + ' '+`${data?.lastName}`},
+        {name: 'PHONE NUMBER',  value:`${data?.phone ? data?.phone : ''}`},
+        {name: 'EMAIL ADDRESS',  value:`${data?.email ? data?.email : ''}`},
         {name: 'BVN',  value:'0129292929'},
-        {name: 'GENDER',  value:'female'},
-        {name: 'MARITAL STATUS',  value:'single'},
-        {name: 'CHILDREN',  value:'none'},
-        {name: 'TYPE OF RESIDENCE',  value:'abuja'},
+        {name: 'GENDER',  value:`${data?.gender}`},
+        {name: 'MARITAL STATUS',  value:`${data?.status ? data?.status : 'single'}`},
+        {name: 'CHILDREN',  value:`${data?.status ? data?.status : 'none'}`},
+        {name: 'TYPE OF RESIDENCE',  value: ``},
     ]
     const educationAndEmployment = [
         {name: 'LEVEL OF EDUCATION',  value:'B.Sc'},
         {name: 'EMPLOYMENT STATUS',  value:'Employed'},
-        {name: 'SECTOR OF EMPLOYMENT',  value:'FinTech'},
+        {name: 'SECTOR OF EMPLOYMENT',  value:`${data?.company?.department ? data?.company?.department : ''}`},
         {name: 'DURATION OF EMPLOYMENT',  value:'2 years'},
-        {name: 'OFFICIAL EMAIL',  value:'grace@learnsqr'},
-        {name: 'MONTHLY INCOME',  value:'₦200,000.00- ₦400,000.00'},
+        {name: 'OFFICIAL EMAIL',  value:`${data?.email ? data?.email : ''}`},
+        {name: 'MONTHLY INCOME',  value:'₦20,000- ₦40,000'},
         {name: 'LOAN REPAYMENT',  value:'40,000'},
     ]
 
@@ -69,12 +74,12 @@ const UserDetails = () => {
 
                 <div className={` flex gap-5    `}>
                     <div className={`w-[7rem] h-[7rem] content-center grid  rounded-full bg-[#dbe0ea] `}>
-                        <UserRound className={` mr-auto ml-auto h-8 w-8   text-[#213F7D] `} />
+                            <UserRound className={` mr-auto ml-auto h-8 w-8   text-[#213F7D] `} />
                     </div>
                     <div className={` md:flex  flex sp2  py-3 `}>
                         <div className={` h-full  grid  pr-10 border-r border-[#dddfe5] `}>
                             <div className={` self-center h-fit `}>
-                                <p id={'userFullName'} data-testid={'userFullName'} className={`${workSans500.className} self-center flex break-keep    text-[#213F7D] text-[15px] md:text-[22px] `}>Grace Effiom</p>
+                                <p id={'userFullName'} data-testid={'userFullName'} className={`${workSans500.className} self-center flex break-keep    text-[#213F7D] text-[15px] md:text-[22px] `}>{data?.firstName} {data?.lastName}</p>
                                 <p id={'userId'} data-testid={'userId'} className={` ${workSans.className} self-center text-[#545F7D] text-[14px]  `}>LSQFf587g90</p>
                             </div>
                         </div>

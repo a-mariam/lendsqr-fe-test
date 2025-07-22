@@ -50,8 +50,8 @@ interface DropdownOption {
 interface Props<T extends TableRowData> {
     tableData: T[];
     tableHeader: ColumnProps<T>[];
-    handleRowClick: (row: T) => void;
-    handleDropDownClick?: (id: string, row: TableRowData) => void;
+    handleRowClick: ( id: string) => void;
+    handleDropDownClick?: (id: string, rowID: string) => void;
     tableHeight?: number;
     sx?: string;
     tableStyle?: string;
@@ -160,9 +160,9 @@ function DataTable<T extends TableRowData>({
                 <TableSkeleton />
             ) : tableData?.length === 0 ? (
                 searchEmptyState ? (
-                    <TableEmptyState icon={<MagnifyingGlassIcon />} name={sideBarTabName} className={emptyStateStyle} optionalFilterName={optionalFilterName} condition={condition} isSearch={true} />
+                    <TableEmptyState icon={<MagnifyingGlassIcon />} name={sideBarTabName} className={emptyStateStyle}  isSearch={true} />
                 ) : (
-                    <TableEmptyState icon={icon} name={sideBarTabName} className={emptyStateStyle} optionalFilterName={optionalFilterName} condition={condition} />
+                    <TableEmptyState icon={icon} name={sideBarTabName} className={emptyStateStyle}   />
                 )
             ) : (
                 <>
@@ -187,7 +187,7 @@ function DataTable<T extends TableRowData>({
                                         <TableRow key={rowIndex}  className={sx}>
                                             {tableHeader.map((column) => (
                                                 <TableCell
-                                                    onClick={() => handleRowClick(row)}
+                                                    onClick={() => handleRowClick(row?.id)}
                                                     id={column.title?.toString()} data-testid={column.title?.toString()}
                                                     key={`${column.id}${rowIndex}`}  className={`h-1 ${isLastPage ? "border-b" : ""} ${tableCellStyle} overflow-hidden whitespace-nowrap text-ellipsis max-w-[80px]`}>
                                                     <div className={`${styles.tableBodyItem} ${tableStyle} h-fit py-3  text-[#545F7D]  text-[14px]  ${workSans.className}  truncate`}>
@@ -226,7 +226,7 @@ function DataTable<T extends TableRowData>({
                                                                                 }`}
                                                                                 onClick={() =>
                                                                                     handleDropDownClick &&
-                                                                                    handleDropDownClick(option.id, row)
+                                                                                    handleDropDownClick(option.id, row?.id)
                                                                                 }
                                                                             >
                                                                                 {option?.icon}
@@ -296,7 +296,7 @@ function DataTable<T extends TableRowData>({
                                 </TableHeader>
                                 <TableBody>
                                     {paginatedData?.map((row, rowIndex) => (
-                                        <TableRow key={rowIndex} className={`h-fit py-3  text-[#545F7D] py-4 h-fit  text-[14px]  ${workSans.className}`} onClick={() => handleRowClick(row)}>
+                                        <TableRow key={rowIndex} className={`h-fit py-3  text-[#545F7D] py-4 h-fit  text-[14px]  ${workSans.className}`} onClick={() => handleRowClick(row?.id)}>
                                             <TableCell className="truncate px-4 py-2">
                                                 {renderCellContent(
                                                     tableHeader.find((h) => h.id === staticColunm)!,
