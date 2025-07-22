@@ -6,16 +6,16 @@ type Props = {
     name?:string,
     icon?: ElementType | React.ReactNode,
     className?:string ,
-    optionalFilterName?:string,
-    condition?: boolean,
+    // optionalFilterName?:string,
+    // condition?: boolean,
     isSearch?: boolean,
-    notification?: boolean
-    message?: string
+    // notification?: boolean
+    // message?: string
     descriptionId?: string
 
 }
 
-function TableEmptyState({name, icon: Icon, className, optionalFilterName, condition, isSearch, notification, message, descriptionId}: Props) {
+function TableEmptyState({name, icon: Icon, className, isSearch, descriptionId}: Props) {
 
 
     return (

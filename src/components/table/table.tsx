@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import TableContainer from "@/components/table/table-container";
-import {getRandomStatusItem, mockData} from "@/util/mock-datas/table";
+import {getRandomStatusItem} from "@/util/mock-datas/table";
 import {MdOutlineRemoveRedEye} from "react-icons/md";
 import {FaUserCheck} from "react-icons/fa";
 import {FaUserXmark} from "react-icons/fa6";
@@ -17,7 +17,7 @@ interface TableRowData {
     [key: string]: string | number | null | React.ReactNode |object ;
 }
 
-interface viewUser {
+export interface viewUser {
     username: string
     email: string
     phone: string
@@ -28,7 +28,7 @@ interface viewUser {
     }
 }
 
-type viewAllUsers = viewUser & TableRowData;
+export type viewAllUsers = viewUser & TableRowData;
 const Table = () => {
     const [pageNumber, setPageNumber] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -51,7 +51,7 @@ const Table = () => {
         { id: "email", title: "EMAIL",selector: (row:  viewAllUsers) =>row.email },
         { id: "phone", title: "PHONE NUMBER",selector: (row:  viewAllUsers) =>row.phone },
         { id: "dateJoined", title: "DATE JOINED",selector: (row:  viewAllUsers) =><div className={`flex`}>{dayjs(row.dateJoined?.toString()).format('MMM D, YYYY')} {formattedTime}</div> },
-        { id: "status", title: "STATUS",selector: (row:  viewAllUsers) =>getRandomStatusItem() },
+        { id: "status", title: "STATUS",selector: (row:  viewAllUsers) => getRandomStatusItem(row) },
     ];
 
     const dropDownOption = [
